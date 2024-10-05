@@ -10,6 +10,7 @@ import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from "primeng/dropdown";
 import { PanelModule } from 'primeng/panel';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { FormsModule } from '@angular/forms';
 
 const PRIMENG_MODULES = [
     CardModule,
@@ -19,7 +20,8 @@ const PRIMENG_MODULES = [
     DividerModule,
     DropdownModule,
     PanelModule,
-    InputNumberModule
+    InputNumberModule,
+    FormsModule
 ]
 @NgModule({
 	imports: [

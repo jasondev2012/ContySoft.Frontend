@@ -34,8 +34,19 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'General',
                 items: [
-                    { label: 'Configuraciones', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks'], badge: 'NEW' },
+                    { label: 'Configuraciones', icon: 'pi pi-fw pi-cog', routerLink: ['/blocks'], badge: 'NEW' },
                 ]
+            },
+            {
+                label: 'Sistema',
+                items: [
+                    {
+                        label: 'Cerrar sesión',
+                        icon: 'pi pi-fw pi-power-off', 
+                        routerLink: ['/auth/login']
+                    },
+                ]
+                
             }
         ];
     }

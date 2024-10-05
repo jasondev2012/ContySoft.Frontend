@@ -2,12 +2,14 @@
     <div class="grid formgrid mt-3">
         <div class="col-12 mb-2 md:col-3 lg:mb-0">
             <span class="p-float-label w-full">
-                <input id="float-input" style="width: 100%;" type="text" pInputText>
+                <input [(ngModel)]="numeroRuc" id="float-input" style="width: 100%;" type="text" pInputText
+                (ngModelChange)="validarRuc()" maxlength="11">
                 <label for="float-input" class="font-bold"># RUC</label>
             </span>
+            <div *ngIf="mensajeError != null" class="text-red-500 mt-2">{{ mensajeError }}</div>
         </div>
         <div class="col-12 mb-2 md:col-2 lg:mb-0">
-            <button pButton label="Buscar" class="p-button-outlined mb-2 w-full" icon="pi pi-search"></button>
+            <button [disabled]="rucInvalido" pButton label="Buscar" (click)="onBusquedaRucClick()" class="p-button-outlined mb-2 w-full" icon="pi pi-search"></button>
         </div>
     </div>
     <div class="grid formgrid mt-5">
