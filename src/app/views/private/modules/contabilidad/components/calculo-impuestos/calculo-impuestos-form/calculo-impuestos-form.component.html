@@ -1,0 +1,171 @@
+<p-card header="Cálculo de Impuestos">
+    <div class="grid formgrid mt-3">
+        <div class="col-12 mb-2 md:col-3 lg:mb-0">
+            <span class="p-float-label w-full">
+                <input id="float-input" style="width: 100%;" type="text" pInputText>
+                <label for="float-input" class="font-bold"># RUC</label>
+            </span>
+        </div>
+        <div class="col-12 mb-2 md:col-2 lg:mb-0">
+            <button pButton label="Buscar" class="p-button-outlined mb-2 w-full" icon="pi pi-search"></button>
+        </div>
+    </div>
+    <div class="grid formgrid mt-5">
+        <div class="col-12 mb-2 lg:col-3 lg:mb-0 mt-3">
+            <span class="p-float-label w-full">
+                <input id="float-input" [disabled]="true" value="AAA" style="width: 100%;" type="text" pInputText>
+                <label for="float-input" class="font-bold">Denominación o Razón Social</label>
+            </span>
+        </div>
+        <div class="col-12 mb-2 lg:col-2 lg:mb-0 mt-3">
+            <span class="p-float-label w-full">
+                <input id="float-input" [disabled]="true" value="NATURAL" style="width: 100%;" type="text" pInputText>
+                <label for="float-input" class="font-bold">Tipo persona</label>
+            </span>
+        </div>
+    </div>
+    <p-divider />
+    <div class="grid formgrid mt-3">
+        <div class="col-12">
+            <div class="flex flex-wrap gap-3 p-fluid mt-4">
+                <div class="flex-auto">
+                    <label class="block ml-2 mb-2 font-bold" for="cboMes">Mes</label>
+                    <p-dropdown id="cboMes" emptyMessage="Sin resultados" [options]="[]" placeholder="Seleccione una opción" [showClear]="true"></p-dropdown>
+                </div>
+                <div class="flex-auto">
+                    <label class="block ml-2 mb-2 font-bold" for="cboAnio">Año</label>
+                    <p-dropdown id="cboAnio" emptyMessage="Sin resultados" [options]="[]" placeholder="Seleccione una opción" [showClear]="true"></p-dropdown>
+                </div>
+                <div class="flex-auto">
+                    <label class="block ml-2 mb-2 font-bold" for="cboRegimenTributario">Régimen Tributario</label>
+                    <p-dropdown id="cboRegimenTributario" emptyMessage="Sin resultados" [options]="[]" placeholder="Seleccione una opción" [showClear]="true"></p-dropdown>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid formgrid">
+        <div class="col-12 md:col-6 pt-4">
+            <p-panel class="line-height-3 m-0">
+                <ng-template pTemplate="header">
+                    <h3>Ventas</h3>
+                </ng-template>
+                <div class="flex flex-wrap gap-3 p-fluid mt-4">
+                    <div class="flex-auto">
+                        <label class="block font-bold mb-2" for="ventaBaseImponible">
+                            Base Imponible
+                        </label>
+                        <p-inputNumber 
+                            inputId="ventaBaseImponible" 
+                            mode="currency" 
+                            placeholder="S/"
+                            currency="PEN"
+                            mode="decimal"
+                            [minFractionDigits]="2"
+                            [maxFractionDigits]="4" 
+                            locale="es-PE" />
+                    </div>
+                    <div class="flex-auto">
+                        <label class="block font-bold mb-2" for="ventaIgv">
+                            IGV
+                        </label>
+                        <p-inputNumber 
+                            inputId="ventaIgv"
+                            placeholder="%"
+                            mode="decimal"
+                            [minFractionDigits]="2"
+                            [maxFractionDigits]="4"
+                            prefix="%" /> 
+                    </div>
+                    <div class="flex-auto">
+                        <label class="block font-bold mb-2" for="ventaImporteTotal">
+                            Importe total
+                        </label>
+                        <p-inputNumber 
+                            inputId="ventaImporteTotal" 
+                            mode="currency" 
+                            placeholder="S/"
+                            currency="PEN"
+                            mode="decimal"
+                            [minFractionDigits]="2"
+                            [maxFractionDigits]="4"
+                            locale="es-PE" />
+                    </div>
+                </div>
+                <p-button label="Generar Totales" styleClass="mt-3" severity="success" />
+            </p-panel>
+        </div>
+        <div class="col-12 md:col-6 pt-4">
+            <p-panel class="line-height-3 m-0">
+                <ng-template pTemplate="header">
+                    <h3>Compras</h3>
+                </ng-template>
+                <div class="flex flex-wrap gap-3 p-fluid mt-4">
+                    <div class="flex-auto">
+                        <label class="block font-bold mb-2" for="compraBaseImponible">
+                            Base Imponible
+                        </label>
+                        <p-inputNumber 
+                            inputId="compraBaseImponible" 
+                            mode="currency" 
+                            placeholder="S/"
+                            currency="PEN"
+                            mode="decimal"
+                            [minFractionDigits]="2"
+                            [maxFractionDigits]="4" 
+                            locale="es-PE" />
+                    </div>
+                    <div class="flex-auto">
+                        <label class="block font-bold mb-2" for="compraIgv">
+                            IGV
+                        </label>
+                        <p-inputNumber 
+                            inputId="compraIgv"
+                            placeholder="%"
+                            mode="decimal"
+                            [minFractionDigits]="2"
+                            [maxFractionDigits]="4"
+                            prefix="%" /> 
+                    </div>
+                    <div class="flex-auto">
+                        <label class="block font-bold mb-2" for="compraImporteTotal">
+                            Importe total
+                        </label>
+                        <p-inputNumber 
+                            inputId="compraImporteTotal" 
+                            mode="currency" 
+                            placeholder="S/"
+                            currency="PEN"
+                            mode="decimal"
+                            [minFractionDigits]="2"
+                            [maxFractionDigits]="4"
+                            locale="es-PE" />
+                    </div>
+                </div>
+                <p-button label="Generar Totales" styleClass="mt-3" severity="success" />
+            </p-panel>
+        </div>
+    </div>
+    <p-divider/>
+    <div class="grid formgrid">
+        <div class="col-12">
+            <div class="flex flex-wrap gap-3 p-fluid mt-4">
+                <div class="flex-auto">
+                    <p-button label="Calcular IGV" styleClass="mt-3" severity="success" />
+                </div>
+                <div class="flex-auto">
+                    <p-button label="Calcular Renta" styleClass="mt-3" severity="success" />
+                </div>
+                <div class="flex-auto">
+                    <p-button label="Validar" styleClass="mt-3" severity="success" />
+                </div>
+                <div class="flex-auto">
+                    <p-button label="Enviar al Experto" styleClass="mt-3" severity="success" />
+                </div>
+                <div class="flex-auto">
+                    <p-button label="Limpiar" styleClass="mt-3" severity="success" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</p-card>
