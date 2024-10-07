@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api: 'http://127.0.0.1:5000/api/',
+  token_consulta_ruc: 'apis-token-10815.cod4MeKws7xvLc6PgoOvpspfCgcuWrKx',
+  api_consulta_ruc: 'https://api.apis.net.pe/v2/sunat/ruc'
 };
 
 /*

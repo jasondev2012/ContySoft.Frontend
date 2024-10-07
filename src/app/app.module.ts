@@ -11,20 +11,34 @@ import { EventService } from './demo/service/event.service';
 import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
-import { CardModule } from 'primeng/card';
-import { ContabilidadModule } from './views/private/modules/contabilidad/contabilidad.module';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { AuthInterceptor } from './common/interceptors/auth.interceptor';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
     imports: [
         AppRoutingModule,
         AppLayoutModule,
-        ContabilidadModule
+        ToastModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        ProgressSpinnerModule
     ],
-    providers: [
+    providers: [MessageService,
         { provide: LocationStrategy, useClass: PathLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService
+        PhotoService, ProductService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true // Permite múltiples interceptores
+        }
     ],
     bootstrap: [AppComponent],
 })

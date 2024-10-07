@@ -12,3 +12,20 @@ $gutter: 1rem; //for primeflex grid system
 @import "assets/demo/styles/flags/flags.css";
 @import "assets/demo/styles/badges.scss";
 @import "assets/demo/styles/code.scss";
+
+.ng-invalid.ng-dirty {
+    border-color: #f87171 !important;
+}
+
+.spinner-container {
+    position: fixed; /* Para que siempre esté fijo en la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente opcional */
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+  }
