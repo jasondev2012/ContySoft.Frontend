@@ -1,7 +1,7 @@
 <p-card header="Compras">
     <p-table [value]="[]" 
         styleClass="p-datatable-gridlines" 
-        sortField="price" [sortOrder]="-1" [tableStyle]="{ 'min-width': '60rem' }">
+        sortField="periodo" [sortOrder]="-1" [tableStyle]="{ 'min-width': '60rem' }">
         <ng-template pTemplate="caption">
             <div class="flex justify-content-between flex-column sm:flex-row">
                 <button pButton label="Importar" class="p-button-outlined mb-2" icon="pi pi-file-import"></button>
@@ -13,20 +13,29 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="code" style="width:20%">
-                    Code <p-sortIcon field="code" />
+                <th pSortableColumn="periodo">
+                    Periodo <p-sortIcon field="periodo" />
                 </th>
-                <th pSortableColumn="name" style="width:20%">
-                    Name <p-sortIcon field="name" />
+                <th pSortableColumn="denominacion">
+                    Denominación <p-sortIcon field="denominacion" />
                 </th>
-                <th pSortableColumn="price" style="width:20%">
-                    Price <p-sortIcon field="price" />
+                <th pSortableColumn="base_imponible">
+                    Base Imponible <p-sortIcon field="base_imponible" />
                 </th>
-                <th pSortableColumn="category" style="width:20%">
-                    Category <p-sortIcon field="category" />
+                <th pSortableColumn="no_gravados">
+                    No Gravados <p-sortIcon field="no_gravados" />
                 </th>
-                <th pSortableColumn="quantity" style="width:20%">
-                    Quantity <p-sortIcon field="quantity" />
+                <th pSortableColumn="igv">
+                    IGV <p-sortIcon field="igv" />
+                </th>
+                <th pSortableColumn="total">
+                    Total <p-sortIcon field="total" />
+                </th>
+                <th>
+                    Seleccionar
+                </th>
+                <th>
+                    Eliminar
                 </th>
             </tr>
         </ng-template>
