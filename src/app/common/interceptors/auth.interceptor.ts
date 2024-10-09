@@ -10,7 +10,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const session = this.sessionService.getSession();
-
         if (session && session.token) { // Verifica si hay un token en la sesión
             const cloned = req.clone({
                 setHeaders: {
