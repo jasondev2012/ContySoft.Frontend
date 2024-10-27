@@ -21,13 +21,13 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         //this.sessionService.startSessionTimer();
 
-        this.sessionService.onWarningTriggered().subscribe(() => {
-            this.showSessionWarning();
-        });
+        // this.sessionService.onWarningTriggered().subscribe(() => {
+        //     this.showSessionWarning();
+        // });
 
-        this.sessionService.onSessionExpired().subscribe(() => {
-            this.sessionService.endSession();
-        });
+        // this.sessionService.onSessionExpired().subscribe(() => {
+        //     this.sessionService.endSession();
+        // });
     }
     onKeepSession() {
         this.sessionService.resetSession();

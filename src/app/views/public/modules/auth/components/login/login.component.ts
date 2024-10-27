@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { finalize } from 'rxjs';
+import { LoadingService } from 'src/app/common/loading.service';
 import { SessionService } from 'src/app/common/sesion.service';
 import { LoginRequest } from 'src/app/interfaces/auth/login.interface';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
@@ -20,6 +22,7 @@ export class LoginComponent implements OnInit {
         public layoutService: LayoutService,
         private router: Router,
         private loginService: LoginService,
+        private loadingService: LoadingService,
         private messageService: MessageService,
         private sessionService: SessionService
     ) {
@@ -63,7 +66,10 @@ export class LoginComponent implements OnInit {
             return;
         }
 
-        this.loginService.getLogin(request).subscribe({
+        this.loadingService.show();
+        this.loginService.getLogin(request)
+        .pipe(finalize(() => this.loadingService.hide()))
+        .subscribe({
             next: (res) => {
                 if (this.recordarEmail) {
                     localStorage.setItem('EMAIL', this.usuario);

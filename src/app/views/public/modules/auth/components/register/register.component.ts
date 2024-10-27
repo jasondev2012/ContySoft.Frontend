@@ -47,9 +47,8 @@ export class RegisterComponent {
         private loadingService: LoadingService,
         private consultaRucService: ConsultaRucService,
         private sessionService: SessionService
-    )
-    { 
-      this.sessionService.clearSession(); // Limpia la sesión
+    ) {
+        this.sessionService.clearSession(); // Limpia la sesión
     }
     onRucBlur() {
         let rucControl = this.registroForm.get('ruc');
@@ -63,34 +62,47 @@ export class RegisterComponent {
             } else {
                 this.registroForm.get('tipo_persona').setValue(null);
             }
-            this.registroForm.get('razon_social').setValue('SIN DOMINIO S.A.C');
-            // this.consultaRucService.getDatos(ruc)
-            // .pipe(finalize(() => this.loadingService.hide()))
-            // .subscribe({
-            //   next: res => {
-            //     this.registroForm.get('razon_social').setValue(res.razonSocial);
-            //   }
-            // })
+
+            this.consultaRucService
+                .getDatos(ruc)
+                .pipe(finalize(() => this.loadingService.hide()))
+                .subscribe({
+                    next: (res) => {
+                        this.registroForm
+                            .get('razon_social')
+                            .setValue(res.razonSocial);
+                    },
+                    error: (err) => {
+                        console.log(err);
+                        this.registroForm
+                            .get('razon_social')
+                            .setValue('SIN DOMINIO S.A.C');
+                    },
+                });
         }
     }
     onRegistrarClick() {
         if (this.formValid) {
+            this.loadingService.show();
+            const request: RegisterRequest =
+                this.registroForm.getRawValue() as RegisterRequest;
 
-          const request: RegisterRequest = this.registroForm.getRawValue() as RegisterRequest
-
-          this.registerService.setRegistro(request).subscribe({
-              next: (res) => {
-                this.sessionService.setSession(res);
-                this.router.navigate(['/']); // Redirige al home
-              },
-              error: (err) => {
-                  this.messageService.add({
-                      severity: 'error',
-                      summary: 'Ups!',
-                      detail: err.error?.message,
-                  });
-              },
-          });
+            this.registerService
+                .setRegistro(request)
+                .pipe(finalize(() => this.loadingService.hide()))
+                .subscribe({
+                    next: (res) => {
+                        this.sessionService.setSession(res);
+                        this.router.navigate(['/']); // Redirige al home
+                    },
+                    error: (err) => {
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Ups!',
+                            detail: err.error?.message,
+                        });
+                    },
+                });
         } else {
             this.markFormGroupTouched(this.registroForm);
             this.messageService.add({
