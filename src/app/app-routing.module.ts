@@ -11,7 +11,8 @@ import { authGuard } from './common/guards/auth.guard';
                 path: '', component: AppLayoutComponent,
                 children: [
                     { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [authGuard]},
-                    { path: 'contabilidad', loadChildren: () => import('./views/private/modules/contabilidad/contabilidad.module').then(m => m.ContabilidadModule), canActivate: [authGuard] }
+                    { path: 'contabilidad', loadChildren: () => import('./views/private/modules/contabilidad/contabilidad.module').then(m => m.ContabilidadModule), canActivate: [authGuard] },
+                    { path: 'configuracion', loadChildren: () => import('./views/private/modules/configuracion/configuracion.module').then(m => m.ConfiguracionModule), canActivate: [authGuard] }
                 ]
             },
             { path: 'auth', loadChildren: () => import('./views/public/modules/auth/auth.module').then(m => m.AuthModule) },

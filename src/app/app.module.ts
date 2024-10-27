@@ -18,6 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AuthInterceptor } from './common/interceptors/auth.interceptor';
+import { ErrorInterceptor } from './common/interceptors/error.interceptor';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
@@ -37,6 +39,11 @@ import { AuthInterceptor } from './common/interceptors/auth.interceptor';
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
+            multi: true // Permite múltiples interceptores
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ErrorInterceptor,
             multi: true // Permite múltiples interceptores
         }
     ],

@@ -32,9 +32,9 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'General',
+                label: 'Configuraciones',
                 items: [
-                    { label: 'Configuraciones', icon: 'pi pi-fw pi-cog', routerLink: ['/blocks'], badge: 'NEW' },
+                    { label: 'Datos Personales', icon: 'pi pi-fw pi-cog', routerLink: ['/configuracion/datos-personales'], badge: 'NEW' },
                 ]
             },
             {

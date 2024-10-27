@@ -16,6 +16,6 @@ export class LoginService {
     }
 
     getLogin(request: LoginRequest): Observable<SessionResponse>{
-        return this.http.post<SessionResponse>(`${this.api}auth/`, request)
+        return this.http.post<SessionResponse>(`${this.api}auth`, request)
     }
 }

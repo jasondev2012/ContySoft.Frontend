@@ -85,12 +85,8 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/']); // Redirige al home
             },
             error: (err) => {
-                this.messageService.add({
-                    severity: 'error',
-                    summary: 'Ups!',
-                    detail: err.error?.message,
-                });
-            },
+                console.error('Error:', err);
+            }
         });
     }
     onCrearCuentaClick() {
