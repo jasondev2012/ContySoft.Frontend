@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api: 'https://ws-contysoft.azurewebsites.net/api/',
+  api: 'http://127.0.0.1:5000/api/',
+  // api: 'https://ws-contysoft.azurewebsites.net/api/',
   token_consulta_ruc: 'apis-token-10815.cod4MeKws7xvLc6PgoOvpspfCgcuWrKx',
   api_consulta_ruc: 'https://api.apis.net.pe/v2/sunat/ruc'
 };
