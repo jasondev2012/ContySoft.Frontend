@@ -44,11 +44,11 @@ export class ErrorInterceptor implements HttpInterceptor {
                 error: (error: HttpErrorResponse) => {
                     console.log(error);
                     // Manejamos los errores HTTP
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'Ups!',
-                        detail: 'Error en la solicitud',
-                    });
+                    // this.messageService.add({
+                    //     severity: 'error',
+                    //     summary: 'Ups!',
+                    //     detail: 'Error en la solicitud',
+                    // });
                     return throwError(() => error);
                 },
             })

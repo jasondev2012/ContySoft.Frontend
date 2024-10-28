@@ -62,23 +62,25 @@ export class RegisterComponent {
             } else {
                 this.registroForm.get('tipo_persona').setValue(null);
             }
-
-            this.consultaRucService
-                .getDatos(ruc)
-                .pipe(finalize(() => this.loadingService.hide()))
-                .subscribe({
-                    next: (res) => {
-                        this.registroForm
-                            .get('razon_social')
-                            .setValue(res.razonSocial);
-                    },
-                    error: (err) => {
-                        console.log(err);
-                        this.registroForm
-                            .get('razon_social')
-                            .setValue('SIN DOMINIO S.A.C');
-                    },
-                });
+            this.registroForm
+                    .get('razon_social')
+                    .setValue('SIN DOMINIO S.A.C');
+            // this.consultaRucService
+            //     .getDatos(ruc)
+            //     .pipe(finalize(() => this.loadingService.hide()))
+            //     .subscribe({
+            //         next: (res) => {
+            //             this.registroForm
+            //                 .get('razon_social')
+            //                 .setValue(res.razonSocial);
+            //         },
+            //         error: (err) => {
+            //             console.log(err);
+            //             this.registroForm
+            //                 .get('razon_social')
+            //                 .setValue('SIN DOMINIO S.A.C');
+            //         },
+            //     });
         }
     }
     onRegistrarClick() {
@@ -96,11 +98,7 @@ export class RegisterComponent {
                         this.router.navigate(['/']); // Redirige al home
                     },
                     error: (err) => {
-                        this.messageService.add({
-                            severity: 'error',
-                            summary: 'Ups!',
-                            detail: err.error?.message,
-                        });
+                        console.log(err)
                     },
                 });
         } else {

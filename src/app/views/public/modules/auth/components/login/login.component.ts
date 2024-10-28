@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
                     localStorage.removeItem('REC_EMAIL');
                 }
                 this.sessionService.setSession(res);
-                this.router.navigate(['/dashboard']); // Redirige al home
+                this.router.navigate(['/']); // Redirige al home
             },
             error: (err) => {
                 console.error('Error:', err);
