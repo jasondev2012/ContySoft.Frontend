@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs';
 import { LoadingService } from 'src/app/common/loading.service';
+import { SessionService } from 'src/app/common/sesion.service';
 import { VentasService } from 'src/app/services/ventas/ventas.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class VentasGridComponent {
     @ViewChild('fileInput') fileInput!: ElementRef;
     constructor(private ventasService: VentasService,
                 private loadinService: LoadingService,
-                private messageService: MessageService
+                private messageService: MessageService,
+                private sessionService: SessionService
     ) {}
 
     onFileSelected(event: Event): void {
@@ -25,7 +27,8 @@ export class VentasGridComponent {
 
                 this.loadinService.show()
                 // Llamamos al servicio para enviar el archivo
-                this.ventasService.importarVentas(file)
+
+                this.ventasService.importarVentas(file, this.sessionService.getSession().token)
                 .pipe(finalize(() => this.loadinService.hide()))
                 .subscribe({
                     next: (response) => {
@@ -47,6 +50,7 @@ export class VentasGridComponent {
                         this.limpiarCampoArchivo();  // Limpiamos el campo si el archivo no es .txt
                     },
                 });
+                
             } else {
               this.messageService.add({
                   severity: 'warn',

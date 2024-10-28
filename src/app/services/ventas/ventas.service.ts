@@ -13,9 +13,15 @@ export class VentasService {
         this.api = environment.api;
     }
 
-    importarVentas(file: File): Observable<ICustomResponse> {
+    obtenerVentas(token: string): Observable<ICustomResponse>{
+        return this.http.post<ICustomResponse>(`${this.api}ventas/obtener`, {"token": token})
+    }
+
+    importarVentas(file: File, token: string ): Observable<ICustomResponse> {
         const formData = new FormData();
-        formData.append('file', file, file.name); // Agregamos el archivo al FormData
+        formData.append('file', file, file.name);
+        formData.append('token', token) // Agregamos el archivo al FormData
+
 
         return this.http.post<ICustomResponse>(
             `${this.api}ventas/importar`,
