@@ -94,15 +94,7 @@ export class RegisterComponent {
                     next: (res) => {
                         this.sessionService.setSession(res);
                         this.router.navigate(['/']); // Redirige al home
-                    },
-                    error: (err) => {
-                        this.messageService.add({
-                            severity: 'error',
-                            summary: 'Ups!',
-                            detail: err.error?.message,
-                        });
-                    },
-                });
+                    }});
         } else {
             this.markFormGroupTouched(this.registroForm);
             this.messageService.add({

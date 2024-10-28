@@ -8,19 +8,14 @@ import { IConsultaRucResponse } from '../consulta-ruc.interface';
     providedIn: 'root'
   })
 export class ConsultaRucService {
-    api_consulta_ruc: string = ''
-    token_consulta_ruc: string = ''
+    api: string = ''
     constructor(private http: HttpClient,
-    ) { 
-        this.api_consulta_ruc = environment.api_consulta_ruc
-        this.token_consulta_ruc = environment.token_consulta_ruc
+    ) {
+        this.api = environment.api
     }
     getDatos(ruc: string): Observable<IConsultaRucResponse> {
-        const headers = new HttpHeaders({
-            Authorization: `Bearer ${this.token_consulta_ruc}`, // Cabecera para la autorización
-        });
-        return this.http.get<IConsultaRucResponse>(
-            `${this.api_consulta_ruc}?numero=${ruc}`, { headers }
+        return this.http.post<IConsultaRucResponse>(
+            `${this.api}auth/info_sunat`, {ruc}
         );
     }
 }
