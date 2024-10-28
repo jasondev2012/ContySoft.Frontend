@@ -281,6 +281,10 @@ a {
   font-weight: 700;
   color: var(--primary-color);
 }
+.layout-menu ul a.active-menu {
+  font-weight: 700;
+  color: var(--primary-color);
+}
 .layout-menu ul a:hover {
   background-color: var(--surface-hover);
 }

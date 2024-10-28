@@ -5,6 +5,7 @@ import { DatosPersonalesComponent } from './components/datos-personales/datos-pe
 @NgModule({
     imports: [RouterModule.forChild([
         { path: 'datos-personales', data: { breadcrumb: 'Datos Personales' }, component: DatosPersonalesComponent },
+        { path: 'empresa', data: { breadcrumb: 'Empresas' }, loadChildren: () => import('./components/empresa/empresa.module').then(m => m.EmpresaModule)},
         { path: '**', redirectTo: '/notfound' }
     ])],
     exports: [RouterModule]

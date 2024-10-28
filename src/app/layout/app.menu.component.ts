@@ -35,6 +35,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Configuraciones',
                 items: [
                     { label: 'Datos Personales', icon: 'pi pi-fw pi-cog', routerLink: ['/configuracion/datos-personales'], badge: 'NEW' },
+                    { label: 'Empresas', icon: 'pi pi-fw pi-building', routerLink: ['/configuracion/empresa'], badge: 'NEW' },
                 ]
             },
             {
