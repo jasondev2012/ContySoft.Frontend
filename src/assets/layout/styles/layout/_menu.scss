@@ -81,6 +81,10 @@
                 font-weight: 700;
                 color: var(--primary-color);
             }
+            &.active-menu {
+                font-weight: 700;
+                color: var(--primary-color);
+            }
 
             &:hover {
                 background-color: var(--surface-hover);

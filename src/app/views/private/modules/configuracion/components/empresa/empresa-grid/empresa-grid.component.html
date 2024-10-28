@@ -1,0 +1,45 @@
+<p-card header="Mis Empresas">
+    <p-table [value]="[]" 
+        styleClass="p-datatable-gridlines" 
+        sortField="codigo" [sortOrder]="-1" [tableStyle]="{ 'min-width': '60rem' }">
+        <ng-template pTemplate="caption">
+            <div class="flex justify-content-between flex-column sm:flex-row">
+                <p-button label="Nuevo" (click)="onNuevoClick()" />
+                <span class="p-input-icon-left mb-2">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar..." class="w-full"/>
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="codigo">
+                    Código <p-sortIcon field="codigo" />
+                </th>
+                <th pSortableColumn="ruc">
+                    Ruc <p-sortIcon field="ruc" />
+                </th>
+                <th pSortableColumn="razon_social">
+                    Razón Social <p-sortIcon field="razon_social" />
+                </th>
+                <th pSortableColumn="plan">
+                    Plan Actual <p-sortIcon field="plan" />
+                </th>
+                <th pSortableColumn="estado">
+                    Estado <p-sortIcon field="estado" />
+                <th>
+                    Opciones
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{ product.code }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price | currency : 'USD' }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.quantity }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>

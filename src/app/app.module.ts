@@ -20,6 +20,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AuthInterceptor } from './common/interceptors/auth.interceptor';
 import { ErrorInterceptor } from './common/interceptors/error.interceptor';
 import { CardModule } from 'primeng/card';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],

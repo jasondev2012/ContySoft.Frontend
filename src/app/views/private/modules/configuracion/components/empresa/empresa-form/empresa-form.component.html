@@ -1,0 +1,70 @@
+
+<p-card header="Registrar Nueva Empresa">
+    <form [formGroup]="empresaForm">
+        <div class="grid flex">
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="codigo" class="font-bold">Código</label>
+                    <input 
+                        pInputText 
+                        id="codigo" 
+                        formControlName="codigo" />
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="ruc" class="font-bold"># RUC</label>
+                    <input 
+                        pInputText 
+                        id="ruc" 
+                        formControlName="ruc" />
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="razon_social" class="font-bold">Razón Social</label>
+                    <input 
+                        pInputText 
+                        id="razon_social" 
+                        formControlName="razon_social" />
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="direccion" class="font-bold">Dirección</label>
+                    <input 
+                        pInputText 
+                        id="direccion" 
+                        formControlName="direccion" />
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="celuar" class="font-bold">Celular</label>
+                    <input 
+                        pInputText 
+                        id="celuar" 
+                        formControlName="celuar" />
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="telefono" class="font-bold">Teléfono</label>
+                    <input 
+                        pInputText 
+                        id="telefono" 
+                        formControlName="telefono" />
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="email" class="font-bold">Email</label>
+                    <input 
+                        pInputText 
+                        id="email" 
+                        formControlName="email" />
+                </div>
+            </div>
+        </div>    
+    </form>
+</p-card>
