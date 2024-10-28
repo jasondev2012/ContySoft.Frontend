@@ -14,9 +14,7 @@ export class VentasService {
     }
 
     obtenerVentas(token: string): Observable<ICustomResponse>{
-        const formData = new FormData();
-        formData.append('token', token)
-        return this.http.post<ICustomResponse>(`${this.api}ventas/obtener`, formData)
+        return this.http.post<ICustomResponse>(`${this.api}ventas/obtener`, {"token": token})
     }
 
     importarVentas(file: File, token: string ): Observable<ICustomResponse> {

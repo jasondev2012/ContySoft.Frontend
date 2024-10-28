@@ -50,13 +50,7 @@ export class VentasGridComponent {
                         this.limpiarCampoArchivo();  // Limpiamos el campo si el archivo no es .txt
                     },
                 });
-                // this.ventasService.obtenerVentas(this.sessionService.getSession().token)
-                // .pipe(finalize(() => this.loadinService.hide()))
-                // .subscribe({
-                //     next: (response) => {
-                //         console.log(response)
-                //     }
-                // });
+                
             } else {
               this.messageService.add({
                   severity: 'warn',
