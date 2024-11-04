@@ -9,8 +9,12 @@ import { LoginComponent } from './components/login/login.component';
 import { ButtonModule } from 'primeng/button';
 import { RegisterComponent } from './components/register/register.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { CarouselModule } from 'primeng/carousel';
+import { LoginTemplateComponent } from './components/login-template/login-template.component';
+import { InputTextModule } from 'primeng/inputtext';
+
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, LoginTemplateComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -19,7 +23,9 @@ import { TooltipModule } from 'primeng/tooltip';
     CheckboxModule,
     ButtonModule,
     ReactiveFormsModule,
-    TooltipModule
+    TooltipModule,
+    CarouselModule,
+    InputTextModule
   ],
   
 })
