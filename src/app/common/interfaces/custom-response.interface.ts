@@ -1,6 +1,7 @@
 export interface ICustomResponse{
     message: string;
+    success: boolean;
 }
-export interface ICustomDataResponse extends ICustomResponse{
-    data: any
+export interface ICustomDataResponse<T> extends ICustomResponse{
+    data: T
 }

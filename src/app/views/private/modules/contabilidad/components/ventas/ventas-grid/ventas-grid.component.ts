@@ -1,8 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs';
-import { LoadingService } from 'src/app/common/loading.service';
-import { SessionService } from 'src/app/common/sesion.service';
+import { LoadingService } from 'src/app/common/services/loading.service';
+import { SessionService } from 'src/app/common/services/sesion.service';
 import { VentasService } from 'src/app/services/ventas/ventas.service';
 
 @Component({

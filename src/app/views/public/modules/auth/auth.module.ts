@@ -10,11 +10,13 @@ import { ButtonModule } from 'primeng/button';
 import { RegisterComponent } from './components/register/register.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { CarouselModule } from 'primeng/carousel';
-import { LoginTemplateComponent } from './components/login-template/login-template.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { RegisterTemplateComponent } from './components/register-template/register-template.component';
+import { StepsModule } from 'primeng/steps';
+import { RegisterAppService } from 'src/app/common/services/register-app.service';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, LoginTemplateComponent],
+  declarations: [LoginComponent, RegisterComponent, RegisterTemplateComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -25,8 +27,9 @@ import { InputTextModule } from 'primeng/inputtext';
     ReactiveFormsModule,
     TooltipModule,
     CarouselModule,
-    InputTextModule
+    InputTextModule,
+    StepsModule
   ],
-  
+  providers: [RegisterAppService]
 })
 export class AuthModule { }

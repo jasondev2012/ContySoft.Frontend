@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
-import { LoadingService } from './common/loading.service';
-import { SessionService } from './common/sesion.service';
+import { LoadingService } from './common/services/loading.service';
+import { SessionService } from './common/services/sesion.service';
 import Swal from 'sweetalert2';
 
 @Component({

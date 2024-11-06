@@ -1,0 +1,10 @@
+::ng-deep .card-highlight {
+    border: 2px solid var(--primary-color) !important; /* Cambia el color para destacar el borde */
+    box-shadow: 0px 4px 24px  var(--primary-color) !important; /* Añade sombra */
+    background-color: #fff8e1 !important; /* Fondo suave para resaltar */
+    transform: scale(1.05) !important; /* Opcional: aumenta ligeramente el tamaño */
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important; /* Transición suave */
+}
+::ng-deep .card-width{
+    max-width: 350px !important;
+}

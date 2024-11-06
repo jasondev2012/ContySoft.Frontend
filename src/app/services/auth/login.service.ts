@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SessionResponse } from 'src/app/common/sesion.service';
+import { SessionResponse } from 'src/app/common/services/sesion.service';
 import { LoginRequest } from 'src/app/interfaces/auth/login.interface';
 import { environment } from 'src/environments/environment';
 

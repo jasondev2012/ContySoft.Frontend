@@ -26,11 +26,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                 next: (event) => {
                     // Filtra eventos para actuar solo cuando el evento es una respuesta completa
                     if (event.type === HttpEventType.Response) {
-                        console.log(event);
 
                         // Verificar si es una respuesta HttpResponse y "Success" es false
                         const response = event as HttpResponse<any>;
-                        if (response.body?.success === false) {
+                        if (response.body?.success === false && response.body?.code != 200) {
                             this.messageService.add({
                                 severity: 'error',
                                 summary: 'Error ('+ response.body?.code +')',

@@ -1,0 +1,96 @@
+<form [formGroup]="registroForm" class="overflow-hidden">
+    <div class="grid flex justify-content-center px-3">
+        <div class="col-12 flex justify-content-center mt-3">
+            <img src="assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" alt="ContySoft logo" class="mb-5 w-6rem flex-shrink-0">
+        </div>
+        <div class="col-12 sm:col-10 md:col-8 lg:col-6" style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+            <div class="w-full surface-card py-8 px-4 md:px-6 lg:px-8" style="border-radius:53px">
+                <div class="grid">
+                    <div class="col-12">
+                        <div class="text-center mb-2">
+                            <div class="text-900 text-3xl font-medium mb-3">Empieza a usar ContySoft!</div>
+                            <span class="text-600 font-medium">Registra tus datos para continuar</span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="text-900 text-3xl font-medium mb-3">DATOS PARA SUNAT</div>
+                    </div>
+                    <div class="col-12 lg:col-6">
+                        <label for="ruc" class="block text-900 text-xl font-medium mb-2"># RUC</label>
+                        <input id="ruc" formControlName="ruc" type="text" placeholder="# Ruc" pInputText
+                        (blur)="onRucBlur()"
+                        maxlength="11"
+                        [ngClass]="{
+                            'ng-invalid ng-dirty': registroForm.get('ruc').invalid && (registroForm.get('ruc').dirty || registroForm.get('ruc').touched)
+                         }" class="w-full" style="padding:1rem">
+                    </div>
+                    <div class="col-12 lg:col-6">
+                        <label for="tipo_persona" class="block text-900 text-xl font-medium mb-2">Tipo Persona</label>
+                        <input id="tipo_persona" formControlName="tipo_persona" type="text" placeholder="Tipo Persona" pInputText class="w-full" style="padding:1rem">
+                    </div>
+                    <div class="col-12">
+                        <label for="razon_social" class="block text-900 text-xl font-medium mb-2">Razón Social</label>
+                        <input id="razon_social" formControlName="razon_social" type="text" placeholder="Razón Social" pInputText class="w-full" style="padding:1rem">
+                    </div>
+                    <div class="col-12 lg:col-6">
+                        <label for="usuario_sol" class="block text-900 text-xl font-medium mb-2">Usuario Sol</label>
+                        <input id="usuario_sol"
+                        [ngClass]="{
+                            'ng-invalid ng-dirty': registroForm.get('usuario_sol').invalid && (registroForm.get('usuario_sol').dirty || registroForm.get('usuario_sol').touched)
+                         }"
+                         formControlName="usuario_sol" type="text" placeholder="Usuario Sol" pInputText class="w-full ng-invalid ng-dirty" style="padding:1rem">
+                    </div>
+                    <div class="col-12 lg:col-6">
+                        <label for="password_sol" class="block text-900 font-medium mb-2 text-xl">Clave Sol</label>
+                        <p-password id="password_sol"
+                        [feedback]="false"
+                        formControlName="password_sol" placeholder="Contraseña" [toggleMask]="true" styleClass="mb-5 w-full"
+                        [inputStyleClass]="registroForm.get('password_sol').invalid && 
+                                            (registroForm.get('password_sol').dirty || registroForm.get('password_sol').touched) ? 
+                                            'ng-invalid ng-dirty p-3 w-full' : 'p-3 w-full'"
+                        ></p-password>
+                    </div>
+                    <div class="col-12">
+                        <div class="text-900 text-3xl font-medium mb-3">DATOS PARA ContySoft</div>
+                    </div>
+                    <div class="col-12 lg:col-6">
+                        <label for="usuario" class="block text-900 text-xl font-medium mb-2">Email</label>
+                        <input id="usuario"
+                        [ngClass]="{
+                            'ng-invalid ng-dirty': registroForm.get('usuario').invalid && (registroForm.get('usuario').dirty || registroForm.get('usuario').touched)
+                        }"
+                        formControlName="usuario" type="email" placeholder="Email" pInputText class="w-full ng-invalid ng-dirty" style="padding:1rem">
+                    </div>
+                    <div class="col-12 lg:col-6">
+                        <label for="password" class="block text-900 font-medium mb-2 text-xl">
+                            Contraseña
+                            <span 
+                                style="color: var(--primary-color);"
+                                class="text-xl pi pi-question-circle"
+                                pTooltip="Recuerdad que para mantener una seguridad adecuada, la contraseña debe tener al menos 8 dígitos que conformen letras mayúsculas, minúsculas y números." 
+                                tooltipPosition="right" ></span>
+                        </label>
+                        <p-password id="password" 
+                        promptLabel="Ingrese una contraseña"
+                        weakLabel="Muy fácil" 
+                        mediumLabel="Fácil" 
+                        strongLabel="Dificil"
+                        [ngClass]="{
+                            'ng-invalid ng-dirty': registroForm.get('password').invalid && (registroForm.get('password').dirty || registroForm.get('password').touched)
+                         }"
+                        formControlName="password" placeholder="Contraseña" [toggleMask]="true" styleClass="mb-5 w-full" 
+                        [inputStyleClass]="registroForm.get('password').invalid && 
+                                            (registroForm.get('password').dirty || registroForm.get('password').touched) ? 
+                                            'ng-invalid ng-dirty p-3 w-full' : 'p-3 w-full'" 
+                        ></p-password>
+                    </div>
+                    <div class="col-12">
+                        <p-button (onClick)="onRegistrarClick()" label="Registrar" styleClass="mt-3 w-full p-3 text-xl" severity="success" />
+                        <p-button (onClick)="onIrLoginClick()" label="Ir al Login" styleClass="mt-3 w-full p-3 text-xl" severity="secondary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <p>Form Value: {{ registroForm.value | json }}</p> -->
+</form>

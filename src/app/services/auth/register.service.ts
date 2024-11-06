@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SessionResponse } from 'src/app/common/sesion.service';
+import { ICustomDataResponse } from 'src/app/common/interfaces/custom-response.interface';
+import { SessionResponse } from 'src/app/common/services/sesion.service';
 import { RegisterRequest } from 'src/app/interfaces/auth/register.interface';
 import { environment } from 'src/environments/environment';
 
@@ -17,5 +18,8 @@ export class RegisterService {
 
     setRegistro(request: RegisterRequest): Observable<SessionResponse>{
         return this.http.post<SessionResponse>(`${this.api}auth/registro`, request)
+    }
+    validarEmail(email: string): Observable<ICustomDataResponse<boolean>>{
+        return this.http.get<ICustomDataResponse<boolean>>(`${this.api}auth/validar-email/${email}`)
     }
 }
