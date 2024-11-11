@@ -28,7 +28,7 @@ export class LoginTemplateComponent  implements OnInit{
     private messageService: MessageService,
     private sessionService: SessionService
   ){
-    this.products = 
+    this.products =
       [
         {
             id: '1000',
@@ -65,7 +65,7 @@ export class LoginTemplateComponent  implements OnInit{
             quantity: 2,
             inventoryStatus: 'LOWSTOCK',
             rating: 3
-        }    
+        }
     ]
   }
   ngOnInit(): void {

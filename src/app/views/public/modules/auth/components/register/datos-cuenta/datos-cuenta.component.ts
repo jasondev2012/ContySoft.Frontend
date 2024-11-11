@@ -35,7 +35,7 @@ export class DatosCuentaComponent implements OnInit {
             this.registroForm.patchValue(this.registerAppService.informacionRegistro?.cuenta);
         }
     }
-    
+
     nextPage() {
         const cuenta = this.registroForm.getRawValue() as DatosCuenta;
         this.registerAppService.informacionRegistro.cuenta = cuenta;
@@ -43,7 +43,7 @@ export class DatosCuentaComponent implements OnInit {
         //this.submitted = true;
     }
 
-    onEmailBlur(){        
+    onEmailBlur(){
         let email = this.registroForm.get('usuario');
         if (email.valid){
             this.registerService.validarEmail(email.value).subscribe({

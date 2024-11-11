@@ -43,11 +43,11 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     {
                         label: 'Cerrar sesión',
-                        icon: 'pi pi-fw pi-power-off', 
+                        icon: 'pi pi-fw pi-power-off',
                         routerLink: ['/auth/login']
                     },
                 ]
-                
+
             }
         ];
     }

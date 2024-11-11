@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class LoginService {
     api: string = ''
     constructor(private http: HttpClient,
-    ) { 
+    ) {
         this.api = environment.api
     }
 

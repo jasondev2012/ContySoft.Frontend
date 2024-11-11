@@ -1,20 +1,21 @@
 <p-card header="Ventas">
-    <p-table [value]="[]" 
-        styleClass="p-datatable-gridlines" 
-        sortField="periodo" [sortOrder]="-1" [tableStyle]="{ 'min-width': '60rem' }">
+    <p-table [value]="ventas"
+        styleClass="p-datatable-gridlines"
+        sortField="periodo" [sortOrder]="-1" [tableStyle]="{ 'min-width': '60rem' }"
+        [paginator]="true" [rows]="20" responsiveLayout="scroll">
         <ng-template pTemplate="caption">
             <div class="flex justify-content-between flex-column sm:flex-row">
-                <button 
-                    pButton 
-                    label="Importar" 
+                <button
+                    pButton
+                    label="Importar"
                     class="p-button-outlined mb-2"
                     (click)="fileInput.click()"
                     icon="pi pi-file-import"></button>
-                <input 
-                    type="file" 
-                    accept=".txt" 
-                    style="display: none;" 
-                    #fileInput 
+                <input
+                    type="file"
+                    accept=".txt"
+                    style="display: none;"
+                    #fileInput
                     (change)="onFileSelected($event)">
                 <span class="p-input-icon-left mb-2">
                     <i class="pi pi-search"></i>
@@ -42,6 +43,9 @@
                 <th pSortableColumn="total">
                     Total <p-sortIcon field="total" />
                 </th>
+                <th pSortableColumn="estado_CP">
+                    Estado del Comprobante <p-sortIcon field="estado_CP" />
+                </th>
                 <th>
                     Seleccionar
                 </th>
@@ -50,13 +54,19 @@
                 </th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product>
+        <ng-template pTemplate="body" let-venta>
             <tr>
-                <td>{{ product.code }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.price | currency : 'USD' }}</td>
-                <td>{{ product.category }}</td>
-                <td>{{ product.quantity }}</td>
+                <td>{{ venta.periodo }}</td>
+                <td>{{ venta.razon_social }}</td>
+                <td>{{ venta.BI_Gravada }}</td>
+                <td>{{ venta.monto_inafecto }}</td>
+                <td>{{ venta.IGV_IPM }}</td>
+                <td>{{ venta.total }}</td>
+                <td>{{ venta.estado_CP }}</td>
+                <td>
+                    <p-checkbox  [binary]="true" [(ngModel)]="venta.id_estado_CP"></p-checkbox>
+
+                </td>
             </tr>
         </ng-template>
     </p-table>

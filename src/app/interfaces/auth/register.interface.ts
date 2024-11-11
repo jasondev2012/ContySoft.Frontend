@@ -15,24 +15,24 @@ export interface RegisterModel{
     pago: DatosPago;
     plan: DatosPlan
 }
-export interface DatosCuenta{    
+export interface DatosCuenta{
     usuario: string;
     password: string;
 }
-export interface DatosEmpresa{    
+export interface DatosEmpresa{
     ruc: string;
     razon_social: string;
     tipo_persona: string;
     usuario_sol: string;
     password_sol: string;
 }
-export interface DatosPago{    
+export interface DatosPago{
     nombre_titular: string;
     correo_titular: string;
     numero_tarjeta: string;
     fecha_vencimiento: string;
     cvv: number;
 }
-export interface DatosPlan{    
+export interface DatosPlan{
     id_plan: number;
 }

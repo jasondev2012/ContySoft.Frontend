@@ -124,7 +124,7 @@ export class DatosEmpresaComponent {
                         }else{
                             this.registroForm.get('razon_social').setValue(null);
                         }
-                        
+
                     },
                     error: (err) => {
                         console.log(err);

@@ -7,7 +7,7 @@ import { RegisterTemplateComponent } from './components/register-template/regist
 
 @NgModule({
     imports: [RouterModule.forChild([
-        { path: 'login', component: LoginComponent},      
+        { path: 'login', component: LoginComponent},
 		{ path: 'registro', component: RegisterComponent, children: [
 			{
 				path: '', // Ruta vacía para cargar el primer componente en `EmpresaStepsComponent`

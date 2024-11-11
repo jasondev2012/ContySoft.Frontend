@@ -74,6 +74,6 @@ export class AppComponent implements OnInit {
               this.sessionService.endSession();
             }
           });
-        
+
     }
 }

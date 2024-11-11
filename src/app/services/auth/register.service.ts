@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class RegisterService {
     api: string = ''
     constructor(private http: HttpClient,
-    ) { 
+    ) {
         this.api = environment.api
     }
 

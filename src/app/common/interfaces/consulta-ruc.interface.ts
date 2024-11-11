@@ -1,4 +1,4 @@
-export interface IConsultaRucResponse{    
+export interface IConsultaRucResponse{
     razonSocial: string;
     tipoDocumento: string;
     numeroDocumento: string;
