@@ -57,17 +57,50 @@
         <ng-template pTemplate="body" let-venta>
             <tr>
                 <td>{{ venta.periodo }}</td>
-                <td>{{ venta.razon_social }}</td>
+                <td>{{ venta.razonSocial }}</td>
                 <td>{{ venta.BI_Gravada }}</td>
                 <td>{{ venta.monto_inafecto }}</td>
                 <td>{{ venta.IGV_IPM }}</td>
                 <td>{{ venta.total }}</td>
-                <td>{{ venta.estado_CP }}</td>
+                <td>{{ venta.estadoCP }}</td>
                 <td>
-                    <p-checkbox  [binary]="true" [(ngModel)]="venta.id_estado_CP"></p-checkbox>
+                    <p-checkbox  [binary]="true" [(ngModel)]="venta.idEstadoCP"></p-checkbox>
 
+                </td>
+                <td>
+                    <button pButton icon="pi pi-eye" label="Ver Boleta" class="p-button-info" (click)="openBoletaModal(venta)"></button>
                 </td>
             </tr>
         </ng-template>
     </p-table>
+
+    <p-dialog header="Detalles de la Boleta" [(visible)]="displayBoletaModal" [modal]="true" [style]="{ width: '70vw' }" [closable]="true">
+        <div *ngIf="selectedBoleta">
+            <div class="boleta-info">
+                <h3>Boleta N° {{ selectedBoleta.numero }}</h3>
+                <p><strong>Fecha:</strong> {{ selectedBoleta.fecha }}</p>
+                <p><strong>Cliente:</strong> {{ selectedBoleta.cliente }}</p>
+                <p><strong>Total:</strong> {{ selectedBoleta.total }}</p>
+            </div>
+
+            <p-table [value]="selectedBoleta.productos" [tableStyle]="{ 'width': '100%' }">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-producto>
+                    <tr>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.cantidad }}</td>
+                        <td>{{ producto.precioUnitario }}</td>
+                        <td>{{ producto.subtotal }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </p-dialog>
 </p-card>

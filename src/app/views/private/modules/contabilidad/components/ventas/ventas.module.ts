@@ -6,6 +6,7 @@ import { VentasRoutingModule } from './ventas-routing.module';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 
@@ -15,7 +16,8 @@ const PRIMENG_MODULES = [
     InputTextModule,
     ButtonModule,
     FormsModule,
-    CheckboxModule
+    CheckboxModule,
+    DialogModule
 ]
 @NgModule({
 	imports: [

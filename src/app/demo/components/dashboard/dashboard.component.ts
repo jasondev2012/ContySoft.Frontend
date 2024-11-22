@@ -6,7 +6,7 @@ import { Subscription, debounceTime } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { VentasService } from 'src/app/services/ventas/ventas.service';
 import { SessionService } from 'src/app/common/services/sesion.service';
-import { Ventas } from 'src/app/interfaces/ventas/ventas.interface';
+import { Venta } from 'src/app/interfaces/ventas/venta.interface';
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     items!: MenuItem[];
 
-    products!: Ventas[];
+    products!: Venta[];
 
     chartData: any;
 
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.initChart();
         this.ventasService.obtenerVentas(this.sessionService.getSession().token)
         .subscribe(data => {
-            this.products = data.data  as Ventas[]
+            this.products = data.data  as Venta[]
         })
 
         //.then(data => this.products = data);

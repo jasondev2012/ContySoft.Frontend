@@ -4,7 +4,8 @@ import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs';
 import { LoadingService } from 'src/app/common/services/loading.service';
 import { SessionService } from 'src/app/common/services/sesion.service';
-import { Ventas } from 'src/app/interfaces/ventas/ventas.interface';
+import { Producto } from 'src/app/interfaces/ventas/producto.interface';
+import { Venta } from 'src/app/interfaces/ventas/venta.interface';
 import { VentasService } from 'src/app/services/ventas/ventas.service';
 @Component({
     selector: 'app-ventas-grid',
@@ -12,8 +13,11 @@ import { VentasService } from 'src/app/services/ventas/ventas.service';
 })
 export class VentasGridComponent implements OnInit{
 
-    ventas!: Ventas[]
+    displayBoletaModal: boolean = false;
+    selectedBoleta: any = null;
+    ventas!: Venta[]
     token: string
+    products: Producto[]
     @ViewChild('fileInput') fileInput!: ElementRef;
     constructor(private ventasService: VentasService,
                 private loadinService: LoadingService,
@@ -28,10 +32,39 @@ export class VentasGridComponent implements OnInit{
         this.ventasService.obtenerVentas(this.token)
         .subscribe({
             next: res => {
-                this.ventas = res.data;
-                console.log(this.ventas);
+                this.ventas = res.data.filter((venta) => {
+                    venta.idEstadoCP == 1 || venta.idEstadoCP == 3? venta.idEstadoCP=true: venta.idEstadoCP=false
+                    return true;
+                });
             }
         })
+    }
+
+    openBoletaModal(venta: Venta) {
+
+        this.ventasService.obtenerProductos(venta.ruc, venta.serieCP, venta.numCP).subscribe({
+            next: res => {
+                this.products = res.data;
+
+            },
+            error: err => {
+                this.products = [];
+            }
+        });
+
+        this.selectedBoleta = {
+            numero: venta.numCP,
+            fecha: venta.fechaEmision,
+            cliente: venta.cliente,
+            total: venta.total,
+            productos: this.products,
+        };
+        this.displayBoletaModal = true;
+    }
+
+    closeBoletaModal() {
+        this.displayBoletaModal = false;
+        this.selectedBoleta = null;
     }
 
     onFileSelected(event: Event): void {
@@ -57,15 +90,17 @@ export class VentasGridComponent implements OnInit{
                       this.ventasService.obtenerVentas(this.token)
                         .subscribe({
                                     next: res => {
-                                            this.ventas = res.data;
+                                            this.ventas = res.data.filter((venta) => {
+                                                venta.idEstadoCP == 1 || venta.idEstadoCP == 3? venta.idEstadoCP=true: venta.idEstadoCP=false
+                                                return true;
+                                            });
                                             this.router.navigate([this.router.url]);
                                         }
                                     });
-                        this.limpiarCampoArchivo();  // Limpiamos el campo de archivo
-                        // Aquí puedes manejar la respuesta como desees
+                        this.limpiarCampoArchivo();
                     },
                     error: (err) => {
-                        this.limpiarCampoArchivo();  // Limpiamos el campo si el archivo no es .txt
+                        this.limpiarCampoArchivo();
                     },
                 });
 

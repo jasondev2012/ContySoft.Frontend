@@ -1,20 +1,20 @@
-<div class="grid flex w-full min-h-screen mx-0">    
+<div class="grid flex w-full min-h-screen mx-0">
     <div class="col-12 md:col-4 flex justify-content-center align-items-center p-0">
         <div class="grid mx-0">
             <div class="col-12 flex justify-content-center">
-                <img src="assets/layout/images/logo-login.png" alt="ContySoft logo" class="w-10rem flex-shrink-0">        
+                <img src="assets/layout/images/logo-login.png" alt="ContySoft logo" class="w-10rem flex-shrink-0">
             </div>
             <div class="col-12 flex justify-content-center flex-column gap-1 text-center mb-5">
-                <h5 class="text-3xl">Bienvenido!</h5>  
-                <p class="text-xl">Por favor, inicia sesión para continuar.</p>    
+                <h5 class="text-3xl">Bienvenido!</h5>
+                <p class="text-xl">Por favor, inicia sesión para continuar.</p>
             </div>
             <div class="mx-0 grid col-12 flex justify-content-center">
                 <div class="p-0 md:col-9 lg:col-8 sm:col-10 col-12 flex flex-column gap-2">
                     <label for="email" class="text-xl" style="font-weight: bolder;">Email</label>
                     <span class="p-input-icon-left w-full">
                         <i class="pi pi-at"></i>
-                        <input 
-                        pInputText 
+                        <input
+                        pInputText
                         placeholder="Email"
                         id="email"
                         [(ngModel)]="usuario"
@@ -28,8 +28,8 @@
                     <label for="password" class="text-xl" style="font-weight: bolder;">Contraseña</label>
                     <span class="p-input-icon-left w-full">
                         <i class="pi pi-eye-slash"></i>
-                        <input 
-                        pInputText 
+                        <input
+                        pInputText
                         placeholder="Contraseña"
                         id="password"
                         type="password"
@@ -44,7 +44,7 @@
                 <div class="p-0 md:col-9 lg:col-8 sm:col-10 col-12 flex align-items-center justify-content-between mb-5 gap-5">
                     <div class="flex align-items-center">
                         <p-checkbox id="rememberme1" [(ngModel)]="recordarEmail" [binary]="true" styleClass="mr-2"></p-checkbox>
-                        <label for="rememberme1">Rocordar email</label>
+                        <label for="rememberme1">Recordar email</label>
                     </div>
                     <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Olvidaste tu contraseña?</a>
                 </div>
@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-12 md:col-8 flex justify-content-center p-0 hide-on-md" style="background-color: #fff;">
         <img src="assets/images/background.svg" class="width-img" alt="ContySoft logo">
     </div>
