@@ -74,10 +74,10 @@
         </ng-template>
     </p-table>
 
-    <p-dialog header="Detalles de la Boleta" [(visible)]="displayBoletaModal" [modal]="true" [style]="{ width: '70vw' }" [closable]="true">
+    <p-dialog header="Detalles del CPE" [(visible)]="displayBoletaModal" [modal]="true" [style]="{ width: '70vw' }" [closable]="true">
         <div *ngIf="selectedBoleta">
             <div class="boleta-info">
-                <h3>Boleta N° {{ selectedBoleta.numero }}</h3>
+                <h3>{{selectedBoleta.tipoCP}} N° {{ selectedBoleta.numero }}</h3>
                 <p><strong>Fecha:</strong> {{ selectedBoleta.fecha }}</p>
                 <p><strong>Cliente:</strong> {{ selectedBoleta.cliente }}</p>
                 <p><strong>Total:</strong> {{ selectedBoleta.total }}</p>

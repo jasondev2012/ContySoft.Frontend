@@ -53,6 +53,7 @@ export class VentasGridComponent implements OnInit{
         });
 
         this.selectedBoleta = {
+            tipoCP: venta.tipoCP,
             numero: venta.numCP,
             fecha: venta.fechaEmision,
             cliente: venta.cliente,

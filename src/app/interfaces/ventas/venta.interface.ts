@@ -12,4 +12,5 @@ export interface Venta{
     total: string;
     estadoCP: string;
     idEstadoCP: number | boolean;
+    tipoCP: string;
 }
