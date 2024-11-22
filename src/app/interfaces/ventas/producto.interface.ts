@@ -1,11 +1,10 @@
 export interface Producto{
     identificador: number;
     descripcion: string;
-    cantidad: string;
-    precioUnitario: string;
+    cantidad: number;
+    precioUnitario: number;
     codigoItem: string;
     codigoUnidadMedida: string;
     unidadMedidaDesc: string;
-    valorVtaUnitario: string;
-    fechaEmision: string;
+    valorVtaUnitario: number;
 }

@@ -44,22 +44,31 @@ export class VentasGridComponent implements OnInit{
 
         this.ventasService.obtenerProductos(venta.ruc, venta.serieCP, venta.numCP).subscribe({
             next: res => {
-                this.products = res.data;
-
+                this.products = res.data
+                console.log(this.products);
+                this.selectedBoleta = {
+                        tipoCP: venta.tipoCP,
+                        numero: venta.numCP,
+                        fecha: venta.fechaEmision,
+                        cliente: venta.cliente,
+                        total: venta.total,
+                        productos: this.products,
+                    };
             },
             error: err => {
                 this.products = [];
+                this.selectedBoleta = {
+                    tipoCP: venta.tipoCP,
+                    numero: venta.numCP,
+                    fecha: venta.fechaEmision,
+                    cliente: venta.cliente,
+                    total: venta.total,
+                    productos: this.products,
+                };
             }
         });
 
-        this.selectedBoleta = {
-            tipoCP: venta.tipoCP,
-            numero: venta.numCP,
-            fecha: venta.fechaEmision,
-            cliente: venta.cliente,
-            total: venta.total,
-            productos: this.products,
-        };
+
         this.displayBoletaModal = true;
     }
 
