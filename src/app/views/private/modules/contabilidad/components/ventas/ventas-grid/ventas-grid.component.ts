@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild, OnInit, ChangeDetectorRef } from '@an
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingService } from 'src/app/common/services/loading.service';
 import { SessionService } from 'src/app/common/services/sesion.service';
 import { Producto } from 'src/app/interfaces/ventas/producto.interface';
@@ -17,54 +18,86 @@ export class VentasGridComponent implements OnInit{
     selectedBoleta: any = null;
     ventas!: Venta[]
     token: string
-    products: Producto[]
+    products: Producto[] = []
+    anio: any[]
+    mes: any[]
+    periods: Object
+    mesSeleccionado: any | null = null;
+    form: FormGroup;
+
+    get formValid(): boolean {
+        return this.form.valid;
+    }
+
     @ViewChild('fileInput') fileInput!: ElementRef;
     constructor(private ventasService: VentasService,
                 private loadinService: LoadingService,
                 private messageService: MessageService,
                 private sessionService: SessionService,
-                private router: Router
+                private router: Router,
+                private fb: FormBuilder
     ) {
         this.token = this.sessionService.getSession().token
     }
 
     ngOnInit(): void {
-        this.ventasService.obtenerVentas(this.token)
+        this.ventasService.obtenerPeriodo(this.token)
         .subscribe({
             next: res => {
-                this.ventas = res.data.filter((venta) => {
-                    venta.idEstadoCP == 1 || venta.idEstadoCP == 3? venta.idEstadoCP=true: venta.idEstadoCP=false
-                    return true;
-                });
+                this.anio = res?.data[0];
+                this.periods = res?.data[1];
             }
-        })
+        });
+
+
+        // this.ventasService.obtenerVentas(this.token)
+        // .subscribe({
+        //     next: res => {
+        //         this.ventas = res.data.filter((venta) => {
+        //             venta.idEstadoCP == 1 || venta.idEstadoCP == 3? venta.idEstadoCP=true: venta.idEstadoCP=false
+        //             return true;
+        //         });
+        //     }
+        // });
+
+        this.form = this.fb.group({
+            anio: [null, Validators.required],
+            mes: [null, Validators.required],
+          });
     }
 
+    onSelectionChange(event: any): void {
+        this.mes = this.periods[event.value?.value] || null;
+    }
+
+
     openBoletaModal(venta: Venta) {
+        this.selectedBoleta = {
+            tipoCP: venta.tipoCP,
+            numero: venta.numCP,
+            fecha: venta.fechaEmision,
+            cliente: venta.cliente,
+            total: venta.total
+        };
+
 
         this.ventasService.obtenerProductos(venta.ruc, venta.serieCP, venta.numCP).subscribe({
             next: res => {
-                this.products = res.data
-                console.log(this.products);
-                this.selectedBoleta = {
-                        tipoCP: venta.tipoCP,
-                        numero: venta.numCP,
-                        fecha: venta.fechaEmision,
-                        cliente: venta.cliente,
-                        total: venta.total,
-                        productos: this.products,
-                    };
+
+                this.products = res?.data.length == 0? [{
+                    identificador:0,
+                    descripcion:'No encontrado',
+                    cantidad:'No encontrado',
+                    precioUnitario:'No encontrado',
+                    codigoItem:'No encontrado',
+                    codigoUnidadMedida:'No encontrado',
+                    unidadMedidaDesc:'No encontrado',
+                    valorVtaUnitario: 'No encontrado'
+                    }]: res.data;
+                this.selectedBoleta.productos = this.products;
             },
             error: err => {
-                this.products = [];
-                this.selectedBoleta = {
-                    tipoCP: venta.tipoCP,
-                    numero: venta.numCP,
-                    fecha: venta.fechaEmision,
-                    cliente: venta.cliente,
-                    total: venta.total,
-                    productos: this.products,
-                };
+                this.selectedBoleta.productos = this.products;
             }
         });
 
@@ -77,18 +110,10 @@ export class VentasGridComponent implements OnInit{
         this.selectedBoleta = null;
     }
 
-    onFileSelected(event: Event): void {
-        const input = event.target as HTMLInputElement;
-        if (input?.files?.length) {
-            const file: File = input.files[0];
+    cargarDatos(){
 
-            // Verificamos si el archivo es de tipo .txt
-            if (file.type === 'text/plain') {
-
-                this.loadinService.show()
-                // Llamamos al servicio para enviar el archivo
-
-                this.ventasService.importarVentas(file, this.token)
+        this.loadinService.show()
+        this.ventasService.importarVentas(this.token, this.mesSeleccionado.value)
                 .pipe(finalize(() => this.loadinService.hide()))
                 .subscribe({
                     next: (response) => {
@@ -97,7 +122,7 @@ export class VentasGridComponent implements OnInit{
                           summary: 'Ok!',
                           detail: response.message,
                       });
-                      this.ventasService.obtenerVentas(this.token)
+                      this.ventasService.obtenerVentas(this.token, this.mesSeleccionado.value)
                         .subscribe({
                                     next: res => {
                                             this.ventas = res.data.filter((venta) => {
@@ -113,18 +138,8 @@ export class VentasGridComponent implements OnInit{
                         this.limpiarCampoArchivo();
                     },
                 });
-
-
-            } else {
-              this.messageService.add({
-                  severity: 'warn',
-                  summary: 'Ups!',
-                  detail: 'Solo se permiten archivos .txt'
-              });
-            }
-        }
     }
-    // Método para limpiar el input file
+
     limpiarCampoArchivo(): void {
       this.fileInput.nativeElement.value = '';  // Limpiamos el valor del input
     }

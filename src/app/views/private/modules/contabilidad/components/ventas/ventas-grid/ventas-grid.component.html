@@ -2,26 +2,52 @@
     <p-table [value]="ventas"
         styleClass="p-datatable-gridlines"
         sortField="periodo" [sortOrder]="-1" [tableStyle]="{ 'min-width': '60rem' }"
-        [paginator]="true" [rows]="20" responsiveLayout="scroll">
+        [paginator]="true" [rows]="15" responsiveLayout="scroll">
         <ng-template pTemplate="caption">
-            <div class="flex justify-content-between flex-column sm:flex-row">
-                <button
+            <form [formGroup]="form" class="stepsdemo-content">
+
+                <div class="flex justify-content-between flex-column sm:flex-row">
+                    <p>Periodo:</p>
+
+                    <p-dropdown
+                        [options]="anio"
+                        [(ngModel)]="anioSeleccionado"
+                        [showClear]="true"
+                        optionLabel="label"
+                        (onChange)="onSelectionChange($event)"
+                        placeholder="Seleccionar"
+                        [ngClass] = "{
+                            'ng-dirty ng-invalid': form.controls['anio']?.dirty && form.controls['anio']?.invalid
+                        }"
+                        formControlName="anio"
+                        class="ng-invalid ng-dirty"
+                    />
+
+                    <p-dropdown
+                    [options]="mes"
+                    [(ngModel)]="mesSeleccionado"
+                    [showClear]="true"
+                    optionLabel="label"
+                    placeholder="Seleccionar"
+                    [ngClass] = "{
+                        'ng-dirty ng-invalid': form.controls['mes']?.dirty && form.controls['mes']?.invalid
+                    }"
+                    formControlName="mes"
+                    class="ng-invalid ng-dirty"
+                    />
+
+
+                    <button
                     pButton
-                    label="Importar"
+                    label="Aceptar"
                     class="p-button-outlined mb-2"
-                    (click)="fileInput.click()"
-                    icon="pi pi-file-import"></button>
-                <input
-                    type="file"
-                    accept=".txt"
-                    style="display: none;"
-                    #fileInput
-                    (change)="onFileSelected($event)">
-                <span class="p-input-icon-left mb-2">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar..." class="w-full"/>
-                </span>
-            </div>
+                    (click)="cargarDatos()"
+                    icon="pi pi-file-import"
+                    [disabled]="(!formValid)"></button>
+
+                </div>
+            </form>
+
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
@@ -68,7 +94,7 @@
 
                 </td>
                 <td>
-                    <button pButton icon="pi pi-eye" label="Ver Boleta" class="p-button-info" (click)="openBoletaModal(venta)"></button>
+                    <button pButton icon="pi pi-eye" label="Ver CPE" class="p-button-info" (click)="openBoletaModal(venta)"></button>
                 </td>
             </tr>
         </ng-template>

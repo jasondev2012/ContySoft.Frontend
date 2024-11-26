@@ -15,19 +15,21 @@ export class VentasService {
         this.api = environment.api;
     }
 
-    obtenerVentas(token: string): Observable<ICustomDataResponse<Venta[]>>{
-        return this.http.post<ICustomDataResponse<Venta[]>>(`${this.api}ventas/obtener`, {"token": token});
+    obtenerPeriodo(token: string): Observable<ICustomDataResponse<any>>{
+        return this.http.post<ICustomDataResponse<any>>(`${this.api}ventas/periodos`, {"token": token});
     }
 
-    importarVentas(file: File, token: string ): Observable<ICustomResponse> {
-        const formData = new FormData();
-        formData.append('file', file, file.name);
-        formData.append('token', token); // Agregamos el archivo al FormData
+    obtenerVentas(token: string, periodo: string): Observable<ICustomDataResponse<Venta[]>>{
+        return this.http.post<ICustomDataResponse<Venta[]>>(`${this.api}ventas/obtener`, {token: token, periodo: periodo});
+    }
 
 
+    importarVentas(token: string, periodo: string): Observable<ICustomResponse> {
         return this.http.post<ICustomResponse>(
-            `${this.api}ventas/importar`,
-            formData
+            `${this.api}ventas/importar`,{
+                token: token,
+                periodo: periodo
+            }
         );
     }
 

@@ -7,8 +7,10 @@ import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
+import { DropdownModule } from 'primeng/dropdown';
+
 
 const PRIMENG_MODULES = [
     CardModule,
@@ -17,7 +19,9 @@ const PRIMENG_MODULES = [
     ButtonModule,
     FormsModule,
     CheckboxModule,
-    DialogModule
+    DialogModule,
+    DropdownModule,
+    ReactiveFormsModule
 ]
 @NgModule({
 	imports: [
