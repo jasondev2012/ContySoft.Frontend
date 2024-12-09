@@ -1,0 +1,56 @@
+<form class="grid" [formGroup]="frmAlmacen">    
+    <div class="col-12">
+        <div class="flex flex-column">
+            <label class="text-label" htmlFor="codigo">Empresa</label>
+            <p-dropdown [options]="empresas" 
+            optionLabel="nombre"
+            optionValue="id"
+            class="mr-2 w-full"
+            placeholder="Seleccione una empresa"
+            [filter]="true"
+            filterBy="nombre"
+            formControlName="id_empresa" 
+            [appShowErrors]="frmAlmacen.get('id_empresa')"
+            (onChange)="getNuevoCodigo($event)"
+            ></p-dropdown>
+        </div>
+    </div>
+    <div class="col-12 md:col-4">
+        <div class="flex flex-column">
+            <label class="text-label" htmlFor="codigo">Código</label>
+            <input formControlName="codigo" [appShowErrors]="frmAlmacen.get('codigo')" pInputText id="codigo" />
+        </div>
+    </div>
+    <div class="col-12 md:col-8">
+        <div class="flex flex-column">
+            <label class="text-label" htmlFor="nombre">Nombre </label>
+            <input formControlName="nombre" pInputText id="nombre" [appShowErrors]="frmAlmacen.get('nombre')" />
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="flex flex-column">
+            <label class="text-label" htmlFor="direccion">Dirección y/o Ubicación</label>
+            <input formControlName="direccion" pInputText id="direccion" [appShowErrors]="frmAlmacen.get('direccion')" />
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="flex flex-column">
+            <label class="text-label" htmlFor="direccion">Descripción</label>
+            <span class="p-float-label">
+                <textarea formControlName="descripcion" id="float-input" class="w-full" rows="5" cols="30" pInputTextarea></textarea>
+            </span>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="flex flex-row">
+            <p-checkbox formControlName="activo" inputId="activo" binary="true"></p-checkbox>
+            <label class="text-label m-0 ml-2" for="activo">Activo</label>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="flex justify-content-end">
+            <p-button [disabled]="!frmValido" label="Guardar" [loading]="loading" styleClass="mr-1" (click)="save()"></p-button>
+            <p-button [disabled]="loading" label="Cancelar" severity="danger" (click)="ref.close()"></p-button>
+        </div>
+    </div>
+</form>

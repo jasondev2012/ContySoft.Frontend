@@ -11,8 +11,10 @@ import { authGuard } from './common/guards/auth.guard';
                 path: '', component: AppLayoutComponent,
                 children: [
                     { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [authGuard]},
-                    { path: 'contabilidad', loadChildren: () => import('./views/private/modules/contabilidad/contabilidad.module').then(m => m.ContabilidadModule), canActivate: [authGuard] },
-                    { path: 'configuracion', loadChildren: () => import('./views/private/modules/configuracion/configuracion.module').then(m => m.ConfiguracionModule), canActivate: [authGuard] }
+                    { path: 'ventas', loadChildren: () => import('./views/private/modules/punto-de-venta/punto-de-venta.module').then(m => m.PuntoDeVentaModule), canActivate: [authGuard] },
+                    { path: 'inventario', loadChildren: () => import('./views/private/modules/inventario/inventario.module').then(m => m.InventarioModule), canActivate: [authGuard] },
+                    { path: 'configuracion', loadChildren: () => import('./views/private/modules/configuracion/configuracion.module').then(m => m.ConfiguracionModule), canActivate: [authGuard] },
+                    { path: 'reporte', loadChildren: () => import('./views/private/modules/reporte/reporte.module').then(m => m.ReporteModule), canActivate: [authGuard] }
                 ]
             },
             { path: 'auth', loadChildren: () => import('./views/public/modules/auth/auth.module').then(m => m.AuthModule) },

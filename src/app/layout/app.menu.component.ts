@@ -21,14 +21,26 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'Contabilidad',
+                label: 'Punto de Venta',
                 items: [
-                    { label: 'Ventas', icon: 'pi pi-fw pi-credit-card', routerLink: ['/contabilidad/ventas'] },
-                    { label: 'Compras', icon: 'pi pi-fw pi-cart-plus', routerLink: ['/contabilidad/compras'] },
-                    { label: 'Percepciones', icon: 'pi pi-fw pi-chart-pie', routerLink: ['/contabilidad/percepciones'] },
-                    { label: 'Retenciones', icon: 'pi pi-fw pi-bookmark-fill', routerLink: ['/contabilidad/retenciones'] },
-                    { label: 'Liquidaciones', icon: 'pi pi-fw pi-box', routerLink: ['/contabilidad/liquidaciones'] },
-                    { label: 'Cálculo de impuestos', icon: 'pi pi-calculator', routerLink: ['/contabilidad/calculo-impuestos'] },
+                    { label: 'POS', icon: 'pi pi-fw pi-calculator', routerLink: ['/ventas/pos'] },
+                    { label: 'Añadir Venta', icon: 'pi pi-fw pi-cart-plus', routerLink: ['/ventas/agregar'] },
+                    { label: 'Lista de Ventas', icon: 'pi pi-fw pi-list', routerLink: ['/ventas/listar'] },
+                ]
+            },
+            {
+                label: 'Inventario',
+                items: [
+                    { label: 'Productos', icon: 'pi pi-fw pi-th-large', routerLink: ['/inventario/producto/listar'] },
+                    { label: 'Categorias', icon: 'pi pi-fw pi-credit-card', routerLink: ['/inventario/categoria/listar'] },
+                    { label: 'Almacenes', icon: 'pi pi-fw pi-sitemap', routerLink: ['/inventario/almacen/listar'] },
+                    { label: 'Kardex', icon: 'pi pi-fw pi-list', routerLink: ['/inventario/kardex/listar'] }
+                ]
+            },
+            {
+                label: 'Reportes',
+                items: [
+                    { label: 'Ventas', icon: 'pi pi-fw pi-chart-line', routerLink: ['/reporte/ventas'] }
                 ]
             },
             {

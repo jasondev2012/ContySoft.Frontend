@@ -1,0 +1,101 @@
+<p-card subheader="Crea almacenes para gestionar tu inventario en diferentes lugares de almacenamiento y distribución." header="Listado de Almacenes">
+
+    <p-table 
+        #tblAlmacen
+        dataKey="id" 
+        [value]="almacenes"
+        [lazy]="true"
+        (onLazyLoad)="getAlmacenes($event)" 
+        styleClass="p-datatable-gridlines"
+        sortField="id" 
+        [sortOrder]="-1" 
+        [tableStyle]="{ 'min-width': '60rem' }"
+        [paginator]="true" 
+        [rows]="request.pageSize" 
+        responsiveLayout="scroll"
+        [rowHover]="true" 
+        [alwaysShowPaginator]="true"
+        [totalRecords]="totalRegistros"
+        [rowsPerPageOptions]="[10, 25, 50, 100]" 
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"        
+        [globalFilterFields]="['codigo', 'nombre', 'direccion', 'descripcion', 'centro_costo']"        
+        >
+        <ng-template pTemplate="caption">
+            <div class="flex justify-content-between">
+                <p-button icon="pi pi-plus" (click)="openDialogAlmacen()" label="Nuevo Almacén" />
+                <div>
+                    <p-dropdown [options]="empresas" 
+                        optionLabel="nombre"
+                        optionValue="id"
+                        class="mr-2"
+                        placeholder="Seleccione una empresa"
+                        [filter]="true"
+                        filterBy="nombre"
+                        [showClear]="true"
+                        (onChange)="onEmpresaChange($event)"
+                        ></p-dropdown>
+                    <span class="p-input-icon-left ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="onGlobalFilter(tblAlmacen, $event)" placeholder="Buscar" />
+                    </span>
+                </div>
+                
+            </div>
+            <div style="text-align: left">
+           
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="codigo">
+                    Código <p-sortIcon field="codigo" />
+                </th>
+                <th pSortableColumn="nombre">
+                    Nombre <p-sortIcon field="nombre" />
+                </th>
+                <th pSortableColumn="direccion">
+                    Dirección <p-sortIcon field="direccion" />
+                </th>
+                <th pSortableColumn="descripcion">
+                    Descripción <p-sortIcon field="descripcion" />
+                </th>
+                <th>
+                    Estado
+                </th>
+                <!-- <th pSortableColumn="centro_costo">
+                    Centro de Costo <p-sortIcon field="centro_costo" />
+                </th> -->
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-almacen>
+            <tr *ngIf="loading">
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+            </tr>
+            <tr *ngIf="!loading">
+                <td>{{ almacen.codigo }}</td>
+                <td>{{ almacen.nombre }}</td>
+                <td>{{ almacen.direccion }}</td>
+                <td>{{ almacen.descripcion }}</td>
+                <td>
+                    <p-tag severity="success" *ngIf="almacen.activo; else inactivo" value="Activo"></p-tag>
+                    <ng-template #inactivo>
+                        <p-tag severity="danger" value="Inactivo"></p-tag>
+                    </ng-template>
+                </td>
+                <td>
+                    <p-button (click)="openDialogAlmacen(almacen.id)" icon="pi pi-pencil" class="icon-fw-bold" [rounded]="true" [text]="true" severity="primary"></p-button>
+                    <!-- <p-button (click)="openDialogAlmacen(almacen.id)" icon="pi pi-trash" class="icon-fw-bold" [rounded]="true" [text]="true" severity="danger"></p-button> -->
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>

@@ -1,4 +1,4 @@
-# ContySoft
+# ContySale
 INTALACIONES PREVIAS
 
 NODEJS: https://nodejs.org/en/download/prebuilt-installer

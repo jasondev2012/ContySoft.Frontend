@@ -33,10 +33,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.initChart();
-        this.ventasService.obtenerVentas(this.sessionService.getSession().token, 'ALL')
-        .subscribe(data => {
-            this.products = data.data  as Venta[]
-        })
+        // this.ventasService.obtenerVentas(this.sessionService.getSession().token, 'ALL')
+        // .subscribe(data => {
+        //     this.products = data.data  as Venta[]
+        // })
 
         //.then(data => this.products = data);
 

@@ -1,0 +1,184 @@
+.card-container {
+    width: 150px; /* Fija el ancho de cada tarjeta */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .card-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+// ::ng-deep p-card > .pos-card > .p-card-body {
+//   padding: 0 !important;
+//   height: calc(100vh - 8rem)
+// }
+// ::ng-deep p-card > .pos-card > .p-card-body > .p-card-content{
+//   padding: 0 !important;
+//   height: calc((100vh - 8rem) - 65px) 
+// }
+// ::ng-deep p-card > .prod-card > .p-card-body > .p-card-content{
+//   padding: 0 !important;
+//   height: calc((100vh - 8rem) - 95px) 
+// }
+::ng-deep p-card > .pos-card > .p-card-body > .p-card-title{
+  padding: 1.25rem;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+::ng-deep p-card > .prod-card > .p-card-body > .p-card-title{
+  padding: 1.25rem;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+::ng-deep #inputHorizontal{
+  width: 70px !important;
+}
+// ::ng-deep .td-cantidad { 
+//   width: 70px !important;
+
+// }
+// ::ng-deep .pos-body { 
+//   height: calc((100vh - 8rem) - 60px - 64.5px);
+//   background-color: aqua;
+// }
+// ::ng-deep .pos-total { 
+//   height: 25%;
+//   background-color: aqua;
+// }
+// ::ng-deep .pos-productos { 
+//   height: 75%;
+//   overflow: auto;
+//   background-color: red;
+// }
+// ::ng-deep .pos-total { 
+//   margin-bottom: 0 !important;
+// }
+// ::ng-deep .body-cards{
+//   height: 100% !important;
+//   overflow: auto;
+// }
+// ::ng-deep .body-product{
+//   height: calc(100vh - 21rem) !important;
+//   overflow: auto;
+// }
+// ::ng-deep .content-grid{
+//   height: calc(100vh - 90px) !important;
+// }
+
+::ng-deep .content-grid{
+  height: 100% !important; 
+}
+::ng-deep .content-grid {
+  height: calc(87vh + 6px) !important;
+  padding-top: 10px;
+}
+::ng-deep .prod-card{
+  height: 100% !important;
+  padding: 0px !important;
+}
+::ng-deep .pos-card{
+  height: 100% !important;
+  padding: 0px !important;
+}
+::ng-deep .prod-body{
+  height: calc(100% - 150px) !important;
+  position: relative;
+  overflow: auto;
+}
+::ng-deep .pos-body{
+  height: calc(100% - 150px) !important;
+  position: relative;
+}
+::ng-deep .pos-body > .pos-productos{
+  overflow: auto;
+  height: 70% !important;
+
+}
+::ng-deep .pos-body > .pos-total{
+  height: 30% !important;
+  position: absolute;
+  bottom: 0 !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+::ng-deep .prod-card > .p-card-body {
+  height: 100% !important;
+  padding: 0px !important;
+}
+::ng-deep .prod-card > .p-card-body > .p-card-content {
+  height: 98% !important;
+}
+::ng-deep .pos-card > .p-card-body {
+  height: 100% !important;
+  padding: 0px !important;
+}
+::ng-deep .pos-card > .p-card-body > .p-card-content {
+  height: 98% !important;
+}
+::ng-deep .subtotal{
+  background-color: azure;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: small;
+}
+::ng-deep .igv{
+  border-top: 1px grey dashed;
+  margin-top: 5px;
+  padding-top: 5px;
+}
+::ng-deep .btn-vender{  
+  background-color: var(--primary-color) !important;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 3;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+::ng-deep .btn-vender:hover{  
+  background-color: var(--primary-500) !important;
+}
+::ng-deep .btn-cancelar{  
+  background-color: var(--danger-color) !important;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 3;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+::ng-deep .btn-cancelar:hover{  
+  background-color: #dc2626 !important;
+}
+
+/* Estilo del scroll */
+::-webkit-scrollbar {
+  width: 8px; /* Ancho del scroll */
+  height: 8px; /* Alto del scroll (en barras horizontales) */
+}
+
+/* Estilo del fondo de la barra */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Fondo */
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+/* Estilo del pulgar (la parte que se mueve) */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color */
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+/* Hover sobre el pulgar */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color al pasar el mouse */
+}

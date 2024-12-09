@@ -28,7 +28,7 @@ const PRIMENG_MODULES = [
 ];
 @NgModule({
     imports: [...PRIMENG_MODULES, FormsModule, CommonModule, EmpresaStepsRoutingModule, ReactiveFormsModule],
-    declarations: [EmpresaFormComponent, EmpresaPlanesComponent],
+    declarations: [EmpresaPlanesComponent],
     exports: [RouterModule]
 })
 export class EmpresaStepsModule {}

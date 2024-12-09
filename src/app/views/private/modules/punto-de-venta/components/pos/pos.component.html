@@ -1,0 +1,100 @@
+<div class="grid content-grid">
+  <div class="col-12 md:col-5 p-0 h-full">
+    <p-card header="Boleta Electrónica" styleClass="pos-card">
+      <ng-template pTemplate="header">
+      </ng-template>
+      <div class="" style="border-top: 1px solid #e5e7eb; padding: 1.25rem">
+        <p-dropdown [options]="[]" optionLabel="name" [showClear]="true" styleClass="w-full"
+          placeholder="Cliente varios" />
+      </div>
+      <div class="mb-2" style="padding: 0 1.25rem 0 1.25rem">
+        <p-dropdown [options]="[]" optionLabel="name" [showClear]="true" styleClass="w-full"
+          placeholder="Boleta electrónica" />
+      </div>
+      <div class="pos-body">
+        <div class="pos-productos">
+          <div style="border-top: 1px solid #e5e7eb; ">
+            <p-table [value]="productos">
+              <ng-template pTemplate="body" let-product let-columns="columns">
+                <tr>
+                  <td>
+                    Producto ABC
+                    <br>
+                    <small>{{product.price | currency:'USD'}}</small>
+                  </td>
+                  <td class="td-cantidad">
+                    <p-inputNumber class="input-number-class" [(ngModel)]="value1" [showButtons]="true"
+                      buttonLayout="horizontal" spinnerMode="horizontal" inputId="inputHorizontal"
+                      decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary"
+                      incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
+                  </td>
+                  <td>
+                    {{product.price}}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+        <div class="pos-total w-full">
+          <div class="subtotal">
+            <div class="flex justify-content-between w-full">
+              <label for="">Sub total</label>
+              <span>$150</span>
+            </div>
+            <div class="flex justify-content-between w-full igv">
+              <label for="">IGV(18%)</label>
+              <span>$150</span>
+            </div>
+          </div>
+          <div class="flex justify-content-between w-full btn-vender">
+            <div for="">Vender</div>
+            <div>$350</div>
+          </div>
+          <div class="flex justify-content-between w-full btn-cancelar">
+            <div>5 Productos</div>
+            <div for="">Cancelar</div>
+          </div>
+        </div>
+      </div>
+
+
+    </p-card>
+  </div>
+  <div class="col-12 md:col-7 py-0 px-1 h-full">
+    <p-card header="Productos" styleClass="prod-card">
+      <ng-template pTemplate="header">
+      </ng-template>
+      <div  style="border-top: 1px solid #e5e7eb; padding: 1.25rem; padding-bottom: 0;">
+        <p-multiSelect emptyMessage="No se encontraron categorias" optionLabel="nombre" optionValue="nombre"
+        [showClear]="true" (onChange)="onCategoriaChange($event)" (onPanelHide)="onCategoriaChange($event)"
+        [(ngModel)]="categoriasSeleccionadas" [options]="categorias" styleClass="w-full mb-3"
+        placeholder="Todas las categorias">
+        <ng-template let-value pTemplate="selectedItems">
+          <div class="inline-flex align-items-center gap-2 px-1" *ngFor="let option of value">
+            <div>{{ option.nombre }},</div>
+          </div>
+          <div *ngIf="!value || value.length === 0">Todas las categorias</div>
+        </ng-template>
+      </p-multiSelect>
+      <span class="p-input-icon-left mb-3" style="width: 100% !important;">
+        <i class="pi pi-search"></i>
+        <input type="text" class="w-full" (input)="onFilter($event)" placeholder="Buscar..." pInputText />
+      </span>
+      </div>
+      <div class="prod-body">
+        <div class="flex flex-wrap gap-3 justify-content-start h-full">
+          <div (click)="onProductoClick(item)" *ngFor="let item of productos" class="card-container surface-card border-round p-2 shadow-2"
+            style="cursor: pointer;">
+            <img [src]="item.image" class="w-full border-round" />
+            <div class="p-2 text-center">
+              <div class="font-medium text-lg">{{ item.title }}</div>
+              <p-chip label="{{ item.category }}" styleClass="m-1"></p-chip>
+              <div class="font-bold text-xl mt-2">S/{{ item.price }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>

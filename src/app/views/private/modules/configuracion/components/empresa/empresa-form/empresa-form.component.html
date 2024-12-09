@@ -1,11 +1,12 @@
 
-<p-card header="Registrar Nueva Empresa">
+<p-card [header]="title">
     <form [formGroup]="empresaForm">
         <div class="grid flex">
             <div class="col-12 sm:col-6 md:col-4 lg:col-3">
                 <div class="flex flex-column gap-2">
                     <label for="codigo" class="font-bold">Código</label>
                     <input 
+                        [appShowErrors]="empresaForm.get('codigo')"
                         pInputText 
                         id="codigo" 
                         formControlName="codigo" />
@@ -14,16 +15,18 @@
             <div class="col-12 sm:col-6 md:col-4 lg:col-3">
                 <div class="flex flex-column gap-2">
                     <label for="ruc" class="font-bold"># RUC</label>
-                    <input 
+                    <input
+                        [appShowErrors]="empresaForm.get('ruc')" 
                         pInputText 
                         id="ruc" 
                         formControlName="ruc" />
                 </div>
             </div>
-            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+            <div class="col-12 lg:col-6">
                 <div class="flex flex-column gap-2">
                     <label for="razon_social" class="font-bold">Razón Social</label>
-                    <input 
+                    <input
+                        [appShowErrors]="empresaForm.get('razon_social')" 
                         pInputText 
                         id="razon_social" 
                         formControlName="razon_social" />
@@ -31,26 +34,125 @@
             </div>
             <div class="col-12 sm:col-6 md:col-4 lg:col-3">
                 <div class="flex flex-column gap-2">
-                    <label for="direccion" class="font-bold">Dirección</label>
-                    <input 
+                    <label for="nombre" class="font-bold">Nombre</label>
+                    <input
+                        [appShowErrors]="empresaForm.get('nombre')" 
                         pInputText 
-                        id="direccion" 
+                        id="nombre" 
+                        formControlName="nombre" />
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">            
+                    <label class="text-label" htmlFor="codigo_departamento">Departamento</label>
+                    <p-dropdown [options]="departamentos" 
+                    optionLabel="nombre"
+                    optionValue="codigo"
+                    class="mr-2 w-full"
+                    placeholder="Seleccione una opción..."
+                    [filter]="true"
+                    filterBy="nombre"
+                    emptyMessage="No se encontraron resultados"
+                    formControlName="codigo_departamento" 
+                    [appShowErrors]="empresaForm.get('codigo_departamento')"
+                    (onChange)="getProvincias($event)"
+                    ></p-dropdown>
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="codigo_provincia" class="font-bold">Provincia</label>
+                    <p-dropdown [options]="provincias" 
+                    optionLabel="nombre"
+                    optionValue="codigo"
+                    emptyMessage="No se encontraron resultados"
+                    class="mr-2 w-full"
+                    placeholder="Seleccione una opción..."
+                    [filter]="true"
+                    filterBy="nombre"
+                    formControlName="codigo_provincia" 
+                    [appShowErrors]="empresaForm.get('codigo_provincia')"
+                    (onChange)="getDistritos($event)"
+                    ></p-dropdown>
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="codigo_distrito" class="font-bold">Distrito</label>
+                    <p-dropdown [options]="distritos" 
+                    optionLabel="nombre"
+                    optionValue="codigo"
+                    emptyMessage="No se encontraron resultados"
+                    class="mr-2 w-full"
+                    placeholder="Seleccione una opción..."
+                    [filter]="true"
+                    filterBy="nombre"
+                    formControlName="codigo_distrito" 
+                    [appShowErrors]="empresaForm.get('codigo_distrito')"
+                    ></p-dropdown>
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="direccion" class="font-bold">Dirección</label>
+                    <input
+                        [appShowErrors]="empresaForm.get('direccion')" 
+                        pInputText 
+                        id="direccion"
                         formControlName="direccion" />
                 </div>
             </div>
             <div class="col-12 sm:col-6 md:col-4 lg:col-3">
                 <div class="flex flex-column gap-2">
-                    <label for="celuar" class="font-bold">Celular</label>
-                    <input 
+                    <label for="ciiu" class="font-bold">CIIU</label>
+                    <p-dropdown [options]="ciiu" 
+                    optionLabel="nombre"
+                    optionValue="codigo"
+                    emptyMessage="No se encontraron resultados"
+                    class="mr-2 w-full"
+                    placeholder="Seleccione una opción..."
+                    [filter]="true"
+                    filterBy="nombre"
+                    formControlName="ciiu" 
+                    [appShowErrors]="empresaForm.get('ciiu')"
+                    ></p-dropdown>
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="tipo_empresa" class="font-bold">Tipo de Empresa</label>
+                    <input
+                        [appShowErrors]="empresaForm.get('tipo_empresa')" 
                         pInputText 
-                        id="celuar" 
-                        formControlName="celuar" />
+                        id="tipo_empresa" 
+                        formControlName="tipo_empresa" />
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="representante_legal" class="font-bold">Representante Legal</label>
+                    <input
+                        [appShowErrors]="empresaForm.get('representante_legal')" 
+                        pInputText 
+                        id="representante_legal" 
+                        formControlName="representante_legal" />
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="celular" class="font-bold">Celular</label>
+                    <input
+                        [appShowErrors]="empresaForm.get('celular')" 
+                        pInputText 
+                        id="celular" 
+                        formControlName="celular" />
                 </div>
             </div>
             <div class="col-12 sm:col-6 md:col-4 lg:col-3">
                 <div class="flex flex-column gap-2">
                     <label for="telefono" class="font-bold">Teléfono</label>
-                    <input 
+                    <input
+                        [appShowErrors]="empresaForm.get('telefono')" 
                         pInputText 
                         id="telefono" 
                         formControlName="telefono" />
@@ -59,12 +161,31 @@
             <div class="col-12 sm:col-6 md:col-4 lg:col-3">
                 <div class="flex flex-column gap-2">
                     <label for="email" class="font-bold">Email</label>
-                    <input 
+                    <input
+                        [appShowErrors]="empresaForm.get('email')" 
                         pInputText 
                         id="email" 
                         formControlName="email" />
                 </div>
             </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3 flex align-items-end">
+                <div class="flex flex-row align-items-center">
+                    <p-checkbox formControlName="es_principal" inputId="es_principal" binary="true"></p-checkbox>
+                    <label class="text-label m-0 ml-2" for="es_principal">Es Principal</label>
+                </div>
+            </div>
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3 flex align-items-end">
+                <div class="flex flex-row align-items-center">
+                    <p-checkbox formControlName="activo" inputId="activo" binary="true"></p-checkbox>
+                    <label class="text-label m-0 ml-2" for="activo">Activo</label>
+                </div>
+            </div>
         </div>    
     </form>
+    <ng-template pTemplate="footer">
+        <div class="flex justify-content-end">
+            <p-button [disabled]="!frmValido" label="Guardar" [loading]="loading" styleClass="mr-1" (click)="save()"></p-button>
+            <p-button [disabled]="loading" label="Cancelar" severity="danger" (click)="back()"></p-button>
+        </div>
+    </ng-template>
 </p-card>

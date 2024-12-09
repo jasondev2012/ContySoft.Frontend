@@ -14,8 +14,8 @@ import { EmpresaStepsComponent } from './empresa-steps/empresa-steps.component';
 					import('./empresa-steps/empresa-steps.module').then(m => m.EmpresaStepsModule),
 			}
 		]},
-
-		{ path: 'nuevo', component: EmpresaFormComponent },
+		{ path: 'registro', component: EmpresaFormComponent },
+		{ path: 'actualizar/:id', component: EmpresaFormComponent },
 	])],
 	exports: [RouterModule]
 })

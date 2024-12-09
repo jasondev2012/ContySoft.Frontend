@@ -22,6 +22,5 @@ export class AppTopBarComponent {
         private sessionService: SessionService
     ) {
         this.session = this.sessionService.getSession();
-        console.log(this.session)
     }
 }
