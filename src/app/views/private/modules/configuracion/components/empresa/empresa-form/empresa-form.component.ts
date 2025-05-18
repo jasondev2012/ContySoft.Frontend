@@ -3,9 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
 
 @Component({
-  selector: 'app-empresa-form',
-  templateUrl: './empresa-form.component.html',
-  styleUrl: './empresa-form.component.scss'
+    selector: 'app-empresa-form',
+    templateUrl: './empresa-form.component.html',
+    styleUrl: './empresa-form.component.scss',
+    standalone: false
 })
 export class EmpresaFormComponent {
   empresaForm: FormGroup;

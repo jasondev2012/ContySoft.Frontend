@@ -11,6 +11,7 @@ import { passwordValidator } from 'src/app/utils/abstrac-control/validaciones';
     selector: 'app-datos-cuenta',
     templateUrl: './datos-cuenta.component.html',
     styleUrl: './datos-cuenta.component.scss',
+    standalone: false
 })
 export class DatosCuentaComponent implements OnInit {
     emailValido: boolean = false;

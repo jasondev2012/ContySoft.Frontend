@@ -11,6 +11,7 @@ import { LoginService } from 'src/app/services/auth/login.service';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
+    standalone: false
 })
 export class LoginComponent implements OnInit {
     recordarEmail: boolean = false;

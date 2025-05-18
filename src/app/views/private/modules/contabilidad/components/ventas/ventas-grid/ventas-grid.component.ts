@@ -11,6 +11,7 @@ import { VentasService } from 'src/app/services/ventas/ventas.service';
 @Component({
     selector: 'app-ventas-grid',
     templateUrl: './ventas-grid.component.html',
+    standalone: false
 })
 export class VentasGridComponent implements OnInit{
 

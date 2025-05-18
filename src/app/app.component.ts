@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
+    standalone: false
 })
 export class AppComponent implements OnInit {
     isLoading$ = this.loaderService.loading$; // Nos suscribimos al observable del servicio

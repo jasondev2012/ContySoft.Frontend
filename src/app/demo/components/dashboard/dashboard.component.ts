@@ -10,6 +10,7 @@ import { Venta } from 'src/app/interfaces/ventas/venta.interface';
 
 @Component({
     templateUrl: './dashboard.component.html',
+    standalone: false
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 

@@ -18,6 +18,7 @@ import { SessionService } from 'src/app/common/services/sesion.service';
     selector: 'app-register-template',
     templateUrl: './register-template.component.html',
     styleUrl: './register-template.component.scss',
+    standalone: false
 })
 export class RegisterTemplateComponent implements OnInit {
     items: MenuItem[] | undefined;
