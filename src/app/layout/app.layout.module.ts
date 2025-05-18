@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
 import { SidebarModule } from 'primeng/sidebar';
@@ -20,8 +20,7 @@ import { AppLayoutComponent } from "./app.layout.component";
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppMenuitemComponent,
         AppTopBarComponent,
         AppFooterComponent,
@@ -29,10 +28,8 @@ import { ButtonModule } from 'primeng/button';
         AppSidebarComponent,
         AppLayoutComponent,
     ],
-    imports: [
-        BrowserModule,
+    exports: [AppLayoutComponent], imports: [BrowserModule,
         FormsModule,
-        HttpClientModule,
         BrowserAnimationsModule,
         InputTextModule,
         SidebarModule,
@@ -43,8 +40,5 @@ import { ButtonModule } from 'primeng/button';
         RouterModule,
         AppConfigModule,
         OverlayPanelModule,
-        ButtonModule,
-    ],
-    exports: [AppLayoutComponent]
-})
+        ButtonModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppLayoutModule { }

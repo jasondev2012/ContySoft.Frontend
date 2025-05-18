@@ -1,13 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-    HttpEvent,
-    HttpInterceptor,
-    HttpHandler,
-    HttpRequest,
-    HttpResponse,
-    HttpErrorResponse,
-    HttpEventType
-} from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse, HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Observable, tap, throwError } from 'rxjs';
 import { MessageService } from 'primeng/api';
 
