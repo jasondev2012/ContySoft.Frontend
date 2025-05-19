@@ -7,12 +7,12 @@ import { SessionService } from 'src/app/common/services/sesion.service';
 import { LoginRequest } from 'src/app/interfaces/auth/login.interface';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { LoginService } from 'src/app/services/auth/login.service';
+import { Inject } from '@angular/core';
 
 @Component({
     selector: 'app-login-template',
     templateUrl: './login-template.component.html',
-    styleUrl: './login-template.component.scss',
-    standalone: false
+    styleUrl: './login-template.component.scss'
 })
 export class LoginTemplateComponent  implements OnInit{
   products: any[]
@@ -23,7 +23,7 @@ export class LoginTemplateComponent  implements OnInit{
   usuario: string = '';
   constructor(
     public layoutService: LayoutService,
-    private router: Router,
+    @Inject(Router) public router: Router,
     private loginService: LoginService,
     private loadingService: LoadingService,
     private messageService: MessageService,

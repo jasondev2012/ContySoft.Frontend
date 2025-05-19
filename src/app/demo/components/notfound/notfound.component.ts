@@ -1,8 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-notfound',
     templateUrl: './notfound.component.html',
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class NotfoundComponent { }

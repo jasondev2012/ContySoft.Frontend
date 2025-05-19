@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { finalize, Subscription } from 'rxjs';
 import { LoadingService } from 'src/app/common/services/loading.service';
@@ -7,18 +7,22 @@ import { RegisterAppService } from 'src/app/common/services/register-app.service
 import { SessionService } from 'src/app/common/services/sesion.service';
 import { RegisterModel, RegisterRequest } from 'src/app/interfaces/auth/register.interface';
 import { RegisterService } from 'src/app/services/auth/register.service';
+import { Inject } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
+import { StepsModule } from 'primeng/steps';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
-    standalone: false
+    standalone: true,                                    // Componente standalone
+    imports: [RouterModule, ButtonModule, StepsModule],  
 })
 export class RegisterComponent implements OnInit, OnDestroy {
     items: MenuItem[] | undefined;
     subscription: Subscription;
 
     constructor(
-        public router: Router,
+        @Inject(Router) public router: Router,
         public registerAppService: RegisterAppService,
         public messageService: MessageService,
         public loadingService: LoadingService,

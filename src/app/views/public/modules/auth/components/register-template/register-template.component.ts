@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import {
@@ -9,16 +9,20 @@ import {
 } from 'src/app/utils/abstrac-control/validaciones';
 import { LoadingService } from 'src/app/common/services/loading.service';
 import { ConsultaRucService } from 'src/app/common/http/consulta-ruc.service';
-import { finalize } from 'rxjs';
 import { RegisterService } from 'src/app/services/auth/register.service';
-import { RegisterModel } from 'src/app/interfaces/auth/register.interface';
 import { SessionService } from 'src/app/common/services/sesion.service';
+import { Inject } from '@angular/core';
+import { CardModule } from 'primeng/card';
+import { NgClass } from '@angular/common';
+import { PasswordModule } from 'primeng/password';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
     selector: 'app-register-template',
     templateUrl: './register-template.component.html',
     styleUrl: './register-template.component.scss',
-    standalone: false
+    standalone: true,
+    imports: [ReactiveFormsModule, FormsModule, CardModule, NgClass, PasswordModule, ButtonModule]  
 })
 export class RegisterTemplateComponent implements OnInit {
     items: MenuItem[] | undefined;
@@ -44,7 +48,7 @@ export class RegisterTemplateComponent implements OnInit {
     });
     constructor(
         public layoutService: LayoutService,
-        public router: Router,
+        @Inject(Router) public router: Router,
         public messageService: MessageService,
         public registerService: RegisterService,
         private loadingService: LoadingService,

@@ -1,14 +1,44 @@
 import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { LayoutService } from "./service/app.layout.service";
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppTopBarComponent } from './app.topbar.component';
+import { Inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BadgeModule } from 'primeng/badge';
+import { ButtonModule } from 'primeng/button';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { InputTextModule } from 'primeng/inputtext';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { RippleModule } from 'primeng/ripple';
+import { SidebarModule } from 'primeng/sidebar';
+import { AppConfigModule } from './config/config.module';
+import { AppFooterComponent } from "./app.footer.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-layout',
     templateUrl: './app.layout.component.html',
-    standalone: false
+    standalone: true,
+    imports: [
+    FormsModule,
+    InputTextModule,
+    SidebarModule,
+    BadgeModule,
+    RouterModule,
+    RadioButtonModule,
+    InputSwitchModule,
+    RippleModule,
+    OverlayPanelModule,
+    ButtonModule,
+    AppSidebarComponent,
+    AppTopBarComponent,
+    AppFooterComponent,
+    CommonModule
+]
 })
 export class AppLayoutComponent implements OnDestroy {
 
@@ -22,7 +52,7 @@ export class AppLayoutComponent implements OnDestroy {
 
     @ViewChild(AppTopBarComponent) appTopbar!: AppTopBarComponent;
 
-    constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router) {
+    constructor(public layoutService: LayoutService, @Inject(Renderer2) public renderer: Renderer2, @Inject(Router) public router: Router) {
         this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {
             if (!this.menuOutsideClickListener) {
                 this.menuOutsideClickListener = this.renderer.listen('document', 'click', event => {

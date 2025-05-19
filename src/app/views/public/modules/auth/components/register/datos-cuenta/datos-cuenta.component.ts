@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { RegisterAppService } from 'src/app/common/services/register-app.service';
 import { DatosCuenta } from 'src/app/interfaces/auth/register.interface';
 import { RegisterService } from 'src/app/services/auth/register.service';
 import { passwordValidator } from 'src/app/utils/abstrac-control/validaciones';
+import { Inject } from '@angular/core';
+import { CardModule } from 'primeng/card';
 
 @Component({
     selector: 'app-datos-cuenta',
     templateUrl: './datos-cuenta.component.html',
     styleUrl: './datos-cuenta.component.scss',
-    standalone: false
+    standalone: true,
+    imports: [ReactiveFormsModule, FormsModule, CardModule]  
 })
 export class DatosCuentaComponent implements OnInit {
     emailValido: boolean = false;
@@ -20,8 +23,8 @@ export class DatosCuentaComponent implements OnInit {
         return this.registroForm.valid;
     }
     public registroForm: FormGroup;
-    constructor(private router: Router,
-                private fb: FormBuilder,
+    constructor(@Inject(Router) public router: Router,
+                @Inject(FormBuilder) public fb: FormBuilder,
                 public messageService: MessageService,
                 private registerService: RegisterService,
                 private registerAppService: RegisterAppService) {

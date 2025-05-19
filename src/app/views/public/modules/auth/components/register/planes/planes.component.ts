@@ -2,15 +2,18 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterAppService } from 'src/app/common/services/register-app.service';
 import { DatosPlan } from 'src/app/interfaces/auth/register.interface';
+import { Inject } from '@angular/core';
+import { CardModule } from 'primeng/card';
 
 @Component({
     selector: 'app-planes',
     templateUrl: './planes.component.html',
     styleUrl: './planes.component.scss',
-    standalone: false
+    standalone: true,
+    imports: [CardModule]
 })
 export class PlanesComponent {
-  constructor(private router: Router,
+  constructor(@Inject(Router) public router: Router,
               private registerAppService: RegisterAppService) {}
   planSeleccionado: number = 0
   ngOnInit() {

@@ -31,6 +31,9 @@
                             "src/assets"
                         ],
                         "styles": [
+                            "src/assets/layout/styles/theme/lara-light-blue/theme.css",
+                            "node_modules/primeflex/primeflex.css",
+                            "node_modules/primeicons/primeicons.css",
                             "src/styles.scss"
                         ],
                         "scripts": [],

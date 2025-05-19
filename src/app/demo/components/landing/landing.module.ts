@@ -10,14 +10,7 @@ import { ButtonModule } from 'primeng/button';
 
 @NgModule({
     imports: [
-        CommonModule,
-        LandingRoutingModule,
-        DividerModule,
-        StyleClassModule,
-        ChartModule,
-        PanelModule,
-        ButtonModule
     ],
-    declarations: [LandingComponent]
+    declarations: []
 })
 export class LandingModule { }

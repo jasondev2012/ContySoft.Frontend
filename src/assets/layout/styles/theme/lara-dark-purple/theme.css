@@ -59,7 +59,7 @@
   font-display: swap;
   font-style: normal;
   font-named-instance: "Regular";
-  src: url("./fonts/Inter-roman.var.woff2?v=3.19") format("woff2");
+  src: url("fonts/Inter-roman.var.woff2?v=3.19") format("woff2");
 }
 @font-face {
   font-family: "Inter var";
@@ -575,7 +575,7 @@
   .p-datepicker table td > span:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem rgba(102, 237, 152, 0.2);
+    box-shadow: 0 0 0 0.2rem rgba(103, 177, 130, 0.2);
   }
   .p-datepicker table td.p-datepicker-today > span {
     background: transparent;
