@@ -15,12 +15,11 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:application",
+                    "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": {
-                          "base": "dist/contysoft-ng"
-                        },
+                        "outputPath": "dist/contysoft-ng",
                         "index": "src/index.html",
+                        "main": "src/main.ts",
                         "polyfills": [
                             "zone.js"
                         ],
@@ -33,8 +32,7 @@
                         "styles": [
                             "src/styles.scss"
                         ],
-                        "scripts": [],
-                        "browser": "src/main.ts"
+                        "scripts": []
                     },
                     "configurations": {
                         "production": {
@@ -53,7 +51,9 @@
                             "outputHashing": "all"
                         },
                         "development": {
-                          "optimization": false,
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
                             "extractLicenses": false,
                             "sourceMap": true,
                             "namedChunks": true
