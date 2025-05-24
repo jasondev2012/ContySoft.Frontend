@@ -15,20 +15,25 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AuthInterceptor } from './common/interceptors/auth.interceptor';
 import { ErrorInterceptor } from './common/interceptors/error.interceptor';
 import { CardModule } from 'primeng/card';
 import { ReactiveFormsModule } from '@angular/forms';
 
-@NgModule({ declarations: [AppComponent, NotfoundComponent],
-    bootstrap: [AppComponent], imports: [AppRoutingModule,
+@NgModule({
+    declarations: [AppComponent, NotfoundComponent],
+    imports: [
+        AppRoutingModule,
         AppLayoutModule,
         ToastModule,
         BrowserModule,
         BrowserAnimationsModule,
-        ProgressSpinnerModule], providers: [MessageService,
+        HttpClientModule,
+        ProgressSpinnerModule
+    ],
+    providers: [MessageService,
         { provide: LocationStrategy, useClass: PathLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService,
@@ -41,5 +46,8 @@ import { ReactiveFormsModule } from '@angular/forms';
             provide: HTTP_INTERCEPTORS,
             useClass: ErrorInterceptor,
             multi: true // Permite múltiples interceptores
-        }, provideHttpClient(withInterceptorsFromDi())] })
+        }
+    ],
+    bootstrap: [AppComponent],
+})
 export class AppModule {}
