@@ -2,23 +2,16 @@ import { Component, ElementRef, ViewChild, OnInit, ChangeDetectorRef } from '@an
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs';
-import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingService } from 'src/app/common/services/loading.service';
 import { SessionService } from 'src/app/common/services/sesion.service';
 import { Producto } from 'src/app/interfaces/ventas/producto.interface';
 import { Venta } from 'src/app/interfaces/ventas/venta.interface';
 import { VentasService } from 'src/app/services/ventas/ventas.service';
-import { Inject } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { CheckboxModule } from 'primeng/checkbox';
-import { DialogModule } from 'primeng/dialog';
-import { CardModule } from 'primeng/card';
-import { TableModule } from 'primeng/table';
 @Component({
     selector: 'app-ventas-grid',
     templateUrl: './ventas-grid.component.html',
-    standalone: true,
-    imports: [FormsModule, ButtonModule, CheckboxModule, DialogModule, CardModule, TableModule]
+    standalone: false
 })
 export class VentasGridComponent implements OnInit{
 
@@ -42,9 +35,8 @@ export class VentasGridComponent implements OnInit{
                 private loadinService: LoadingService,
                 private messageService: MessageService,
                 private sessionService: SessionService,
-                @Inject(Router) public router: Router,
-                @Inject(FormBuilder) public fb: FormBuilder,
-                
+                private router: Router,
+                private fb: FormBuilder
     ) {
         this.token = this.sessionService.getSession().token
     }

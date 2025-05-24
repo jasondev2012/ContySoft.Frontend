@@ -12,7 +12,7 @@ import { RegisterTemplateComponent } from './components/register-template/regist
 			{
 				path: '', // Ruta vacía para cargar el primer componente en `EmpresaStepsComponent`
 				loadChildren: () =>
-					import('./components/register/register.routes').then(m => m.routes),
+					import('./components/register/register.module').then(m => m.RegisterModule),
 			}
 		]},
         { path: 'registro2', component: RegisterTemplateComponent},

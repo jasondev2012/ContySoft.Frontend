@@ -10,10 +10,15 @@ import { PanelModule } from 'primeng/panel';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StepsModule } from 'primeng/steps';
-import { EmpresaFormComponent } from '../empresa-form/empresa-form.component';
-import { EmpresaStepsRoutingModule } from './empresa-steps-routing.module';
 import { RouterModule } from '@angular/router';
-import { EmpresaPlanesComponent } from '../empresa-planes/empresa-planes.component';
+import { RegisterRoutingModule } from './register-routing.module';
+import { DatosEmpresaComponent } from './datos-empresa/datos-empresa.component';
+import { PlanesComponent } from './planes/planes.component';
+import { PagoComponent } from './pago/pago.component';
+import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
+import { InputMaskModule } from 'primeng/inputmask';
+import { PasswordModule } from 'primeng/password';
+import { DatosCuentaComponent } from './datos-cuenta/datos-cuenta.component';
 
 const PRIMENG_MODULES = [
     CardModule,
@@ -24,11 +29,13 @@ const PRIMENG_MODULES = [
     DropdownModule,
     PanelModule,
     InputNumberModule,
-    StepsModule
+    StepsModule,
+    InputMaskModule,
+    PasswordModule 
 ];
 @NgModule({
-    imports: [...PRIMENG_MODULES, FormsModule, CommonModule, EmpresaStepsRoutingModule, ReactiveFormsModule],
-    declarations: [EmpresaFormComponent, EmpresaPlanesComponent],
+    imports: [...PRIMENG_MODULES, FormsModule, CommonModule, RegisterRoutingModule, ReactiveFormsModule],
+    declarations: [DatosEmpresaComponent, DatosCuentaComponent, PlanesComponent, PagoComponent, ConfirmacionComponent],
     exports: [RouterModule]
 })
-export class EmpresaStepsModule {}
+export class RegisterModule {}

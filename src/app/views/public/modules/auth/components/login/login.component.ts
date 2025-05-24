@@ -7,17 +7,11 @@ import { SessionService } from 'src/app/common/services/sesion.service';
 import { LoginRequest } from 'src/app/interfaces/auth/login.interface';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { LoginService } from 'src/app/services/auth/login.service';
-import { Inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { CheckboxModule } from 'primeng/checkbox';
-import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    standalone: true,
-    imports: [FormsModule, ButtonModule, CheckboxModule, InputTextModule ]
+    standalone: false
 })
 export class LoginComponent implements OnInit {
     recordarEmail: boolean = false;
@@ -27,7 +21,7 @@ export class LoginComponent implements OnInit {
 
     constructor(
         public layoutService: LayoutService,
-        @Inject(Router) public router: Router,
+        private router: Router,
         private loginService: LoginService,
         private loadingService: LoadingService,
         private messageService: MessageService,

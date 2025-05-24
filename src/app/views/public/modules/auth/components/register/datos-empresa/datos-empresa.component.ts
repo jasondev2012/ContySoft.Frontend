@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs/internal/operators/finalize';
 import { ConsultaRucService } from 'src/app/common/http/consulta-ruc.service';
@@ -11,40 +11,12 @@ import { DatosEmpresa, RegisterModel } from 'src/app/interfaces/auth/register.in
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { RegisterService } from 'src/app/services/auth/register.service';
 import { rucValidator } from 'src/app/utils/abstrac-control/validaciones';
-import { Inject } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
-import { DividerModule } from 'primeng/divider';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputMaskModule } from 'primeng/inputmask';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { InputTextModule } from 'primeng/inputtext';
-import { PanelModule } from 'primeng/panel';
-import { PasswordModule } from 'primeng/password';
-import { StepsModule } from 'primeng/steps';
-import { TableModule } from 'primeng/table';
-import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-datos-empresa',
     templateUrl: './datos-empresa.component.html',
     styleUrl: './datos-empresa.component.scss',
-    standalone: true,
-    imports: [    
-        CardModule,
-        TableModule,
-        InputTextModule,
-        ButtonModule,
-        DividerModule,
-        DropdownModule,
-        PanelModule,
-        InputNumberModule,
-        StepsModule,
-        InputMaskModule,
-        PasswordModule,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule]
+    standalone: false
 })
 export class DatosEmpresaComponent {
     personalInformation: any;
@@ -56,14 +28,14 @@ export class DatosEmpresaComponent {
         return this.registroForm.valid;
     }
     public registroForm: FormGroup;
-    constructor(@Inject(Router) public router: Router,
+    constructor(private router: Router,
                 public layoutService: LayoutService,
                 public messageService: MessageService,
                 public registerService: RegisterService,
                 private loadingService: LoadingService,
                 private consultaRucService: ConsultaRucService,
                 private sessionService: SessionService,
-                @Inject(FormBuilder) public fb: FormBuilder,
+                private fb: FormBuilder,
                 private registerAppService: RegisterAppService
     ) {
         this.registroForm = this.fb.group({

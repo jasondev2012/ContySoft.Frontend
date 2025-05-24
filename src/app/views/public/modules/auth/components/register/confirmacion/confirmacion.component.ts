@@ -2,19 +2,16 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterAppService } from 'src/app/common/services/register-app.service';
 import { RegisterModel } from 'src/app/interfaces/auth/register.interface';
-import { Inject } from '@angular/core';
-import { Card } from 'primeng/card';
 
 @Component({
     selector: 'app-confirmacion',
     templateUrl: './confirmacion.component.html',
     styleUrl: './confirmacion.component.scss',
-    standalone: true,
-    imports: [Card]
+    standalone: false
 })
 export class ConfirmacionComponent {
   informacionRegistro: RegisterModel
-  constructor(@Inject(Router) public router: Router,
+  constructor(private router: Router,
               private registerAppService: RegisterAppService
   ) {}
 

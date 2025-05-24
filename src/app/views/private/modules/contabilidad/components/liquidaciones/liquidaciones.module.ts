@@ -19,6 +19,6 @@ const PRIMENG_MODULES = [
 		CommonModule,
         LiquidacionesRoutingModule
 	],
-	declarations: []
+	declarations: [LiquidacionesGridComponent]
 })
 export class LiquidacionesModule { }

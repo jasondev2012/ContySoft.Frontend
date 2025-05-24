@@ -1,33 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';          // Importar RouterModule
+import { PrimeNGConfig } from 'primeng/api';
 import { LoadingService } from './common/services/loading.service';
 import { SessionService } from './common/services/sesion.service';
 import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-root',
-    standalone: true,                                    // Componente standalone
-    imports: [RouterModule],                             // Importar RouterModule para <router-outlet>
-    templateUrl: './app.component.html'
+    templateUrl: './app.component.html',
+    standalone: false
 })
 export class AppComponent implements OnInit {
     isLoading$ = this.loaderService.loading$; // Nos suscribimos al observable del servicio
-
     constructor(
+        private primengConfig: PrimeNGConfig,
         private loaderService: LoadingService,
         private sessionService: SessionService
-    ) {}
+    ) {
+        this.primengConfig.ripple = true;
+    }
 
     ngOnInit() {
-        // this.sessionService.startSessionTimer();
+        //this.sessionService.startSessionTimer();
+
         // this.sessionService.onWarningTriggered().subscribe(() => {
         //     this.showSessionWarning();
         // });
+
         // this.sessionService.onSessionExpired().subscribe(() => {
         //     this.sessionService.endSession();
         // });
     }
-
     onKeepSession() {
         this.sessionService.resetSession();
     }
@@ -35,7 +37,6 @@ export class AppComponent implements OnInit {
     onEndSession() {
         this.sessionService.endSession();
     }
-
     showSessionWarning() {
         const warningTime = 300; // 30 segundos para el aviso
         let timerInterval: any;
@@ -52,25 +53,28 @@ export class AppComponent implements OnInit {
             allowEscapeKey: false,
             allowEnterKey: false,
             didOpen: () => {
-                const content = Swal.getHtmlContainer();
-                if (content) {
-                    const timerEl = content.querySelector('b');  // Selecciona el elemento <b> para el contador
-                    timerInterval = setInterval(() => {
-                        if (timerEl) {
-                            timerEl.textContent = String(Math.floor(Swal.getTimerLeft()! / 1000));  // Actualiza el contador
-                        }
-                    }, 1000);
-                }
+              const content = Swal.getHtmlContainer();
+              if (content) {
+                const timerEl = content.querySelector('b');  // Selecciona el elemento <b> para el contador
+                timerInterval = setInterval(() => {
+                  if (timerEl) {
+                    timerEl.textContent = String(Math.floor(Swal.getTimerLeft()! / 1000));  // Actualiza el contador
+                  }
+                }, 1000);
+              }
             },
             willClose: () => {
-                clearInterval(timerInterval);  // Limpiar el intervalo
+              clearInterval(timerInterval);  // Limpiar el intervalo
             }
-        }).then((result) => {
+          }).then((result) => {
             if (result.isConfirmed) {
-                this.sessionService.resetSession();
+              // Si el usuario elige mantener la sesión, reiniciamos la sesión
+              this.sessionService.resetSession();
             } else if (result.dismiss === Swal.DismissReason.timer || result.dismiss === Swal.DismissReason.cancel) {
-                this.sessionService.endSession();
+              // Si el tiempo se agota o elige cerrar sesión, cerrar la sesión
+              this.sessionService.endSession();
             }
-        });
+          });
+
     }
 }

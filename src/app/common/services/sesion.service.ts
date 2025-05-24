@@ -1,5 +1,5 @@
 // session.service.ts
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
@@ -22,7 +22,7 @@ export class SessionService {
 
     private sessionKey = 'userInfo'; // Clave para almacenar la sesión
 
-    constructor(@Inject(Router) public router: Router) {}
+    constructor(private router: Router) {}
 
     setSession(sessionData: any) {
 

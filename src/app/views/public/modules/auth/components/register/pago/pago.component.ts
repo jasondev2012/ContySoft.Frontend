@@ -1,25 +1,22 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterAppService } from 'src/app/common/services/register-app.service';
 import { DatosPago } from 'src/app/interfaces/auth/register.interface';
-import { Inject } from '@angular/core';
-import { CardModule } from 'primeng/card';
 
 @Component({
     selector: 'app-pago',
     templateUrl: './pago.component.html',
     styleUrl: './pago.component.scss',
-    standalone: true,
-    imports: [CardModule, FormsModule, ReactiveFormsModule]  
+    standalone: false
 })
 export class PagoComponent {
     get formValid(): boolean {
         return this.registroForm.valid;
     }
     public registroForm: FormGroup;
-    constructor(@Inject(Router) public router: Router,
-                @Inject(FormBuilder) public fb: FormBuilder,
+    constructor(private router: Router,
+                private fb: FormBuilder,
                 private registerAppService: RegisterAppService) {
         this.registroForm = this.fb.group({
             nombre_titular: ['JASON GUTIERREZ', [ Validators.required]],

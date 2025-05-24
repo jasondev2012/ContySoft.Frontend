@@ -7,16 +7,10 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { VentasService } from 'src/app/services/ventas/ventas.service';
 import { SessionService } from 'src/app/common/services/sesion.service';
 import { Venta } from 'src/app/interfaces/ventas/venta.interface';
-import { StyleClassModule } from 'primeng/styleclass';
-import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
-import { MenuModule } from 'primeng/menu';
-import { ChartModule } from 'primeng/chart';
 
 @Component({
     templateUrl: './dashboard.component.html',
-    standalone: true,
-    imports: [TableModule, MenuModule, ChartModule, CommonModule ]
+    standalone: false
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 

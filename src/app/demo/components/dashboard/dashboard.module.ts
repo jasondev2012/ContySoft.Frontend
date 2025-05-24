@@ -12,8 +12,16 @@ import { DashboardsRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
     imports: [
-
+        CommonModule,
+        FormsModule,
+        ChartModule,
+        MenuModule,
+        TableModule,
+        StyleClassModule,
+        PanelMenuModule,
+        ButtonModule,
+        DashboardsRoutingModule
     ],
-    declarations: []
+    declarations: [DashboardComponent]
 })
 export class DashboardModule { }

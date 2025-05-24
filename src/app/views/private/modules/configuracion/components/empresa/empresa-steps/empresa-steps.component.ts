@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { CardModule } from 'primeng/card';
-import { StepsModule } from 'primeng/steps';
-import { TableModule } from 'primeng/table';
 
 @Component({
     selector: 'app-empresa-steps',
     templateUrl: './empresa-steps.component.html',
     styleUrl: './empresa-steps.component.scss',
-    standalone: true,
-    imports: [CardModule, TableModule, RouterModule, StepsModule]
+    standalone: false
 })
 export class EmpresaStepsComponent implements OnInit {
 
