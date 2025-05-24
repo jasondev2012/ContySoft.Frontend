@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 @Component({
-    selector: 'app-empresa-steps',
-    templateUrl: './empresa-steps.component.html',
-    styleUrl: './empresa-steps.component.scss',
-    standalone: false
+  selector: 'app-empresa-steps',
+  templateUrl: './empresa-steps.component.html',
+  styleUrl: './empresa-steps.component.scss'
 })
 export class EmpresaStepsComponent implements OnInit {
 

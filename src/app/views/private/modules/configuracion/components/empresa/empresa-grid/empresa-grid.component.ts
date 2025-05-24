@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-empresa-grid',
-    templateUrl: './empresa-grid.component.html',
-    styleUrl: './empresa-grid.component.scss',
-    standalone: false
+  selector: 'app-empresa-grid',
+  templateUrl: './empresa-grid.component.html',
+  styleUrl: './empresa-grid.component.scss'
 })
 export class EmpresaGridComponent {
 

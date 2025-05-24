@@ -8,7 +8,6 @@ import { DatosPago } from 'src/app/interfaces/auth/register.interface';
     selector: 'app-pago',
     templateUrl: './pago.component.html',
     styleUrl: './pago.component.scss',
-    standalone: false
 })
 export class PagoComponent {
     get formValid(): boolean {

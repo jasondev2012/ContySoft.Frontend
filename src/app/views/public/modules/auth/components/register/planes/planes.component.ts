@@ -4,10 +4,9 @@ import { RegisterAppService } from 'src/app/common/services/register-app.service
 import { DatosPlan } from 'src/app/interfaces/auth/register.interface';
 
 @Component({
-    selector: 'app-planes',
-    templateUrl: './planes.component.html',
-    styleUrl: './planes.component.scss',
-    standalone: false
+  selector: 'app-planes',
+  templateUrl: './planes.component.html',
+  styleUrl: './planes.component.scss'
 })
 export class PlanesComponent {
   constructor(private router: Router,

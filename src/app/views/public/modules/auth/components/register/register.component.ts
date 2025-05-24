@@ -11,7 +11,6 @@ import { RegisterService } from 'src/app/services/auth/register.service';
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
-    standalone: false
 })
 export class RegisterComponent implements OnInit, OnDestroy {
     items: MenuItem[] | undefined;

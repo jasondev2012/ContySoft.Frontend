@@ -4,10 +4,9 @@ import { RegisterAppService } from 'src/app/common/services/register-app.service
 import { RegisterModel } from 'src/app/interfaces/auth/register.interface';
 
 @Component({
-    selector: 'app-confirmacion',
-    templateUrl: './confirmacion.component.html',
-    styleUrl: './confirmacion.component.scss',
-    standalone: false
+  selector: 'app-confirmacion',
+  templateUrl: './confirmacion.component.html',
+  styleUrl: './confirmacion.component.scss'
 })
 export class ConfirmacionComponent {
   informacionRegistro: RegisterModel

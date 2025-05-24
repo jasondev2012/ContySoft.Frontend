@@ -9,10 +9,9 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { LoginService } from 'src/app/services/auth/login.service';
 
 @Component({
-    selector: 'app-login-template',
-    templateUrl: './login-template.component.html',
-    styleUrl: './login-template.component.scss',
-    standalone: false
+  selector: 'app-login-template',
+  templateUrl: './login-template.component.html',
+  styleUrl: './login-template.component.scss'
 })
 export class LoginTemplateComponent  implements OnInit{
   products: any[]

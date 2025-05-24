@@ -6,7 +6,6 @@ import { SessionResponse, SessionService } from '../common/services/sesion.servi
 @Component({
     selector: 'app-topbar',
     templateUrl: './app.topbar.component.html',
-    standalone: false
 })
 export class AppTopBarComponent {
     session: SessionResponse

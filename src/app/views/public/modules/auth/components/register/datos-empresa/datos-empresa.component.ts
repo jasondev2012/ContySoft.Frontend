@@ -16,7 +16,6 @@ import { rucValidator } from 'src/app/utils/abstrac-control/validaciones';
     selector: 'app-datos-empresa',
     templateUrl: './datos-empresa.component.html',
     styleUrl: './datos-empresa.component.scss',
-    standalone: false
 })
 export class DatosEmpresaComponent {
     personalInformation: any;
