@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { ICustomResponse, ICustomDataResponse } from 'src/app/common/interfaces/custom-response.interface';
 import { environment } from 'src/environments/environment';
 import { Venta } from 'src/app/interfaces/ventas/venta.interface';
-import {Producto} from 'src/app/interfaces/ventas/producto.interface';
 @Injectable({
     providedIn: 'root',
 })
@@ -15,19 +14,18 @@ export class VentasService {
         this.api = environment.api;
     }
 
-    obtenerPeriodo(token: string): Observable<ICustomDataResponse<any>>{
-        return this.http.post<ICustomDataResponse<any>>(`${this.api}ventas/periodos`, {"token": token});
+    obtenerPeriodo(): Observable<ICustomDataResponse<any>>{
+        return this.http.get<ICustomDataResponse<any>>(`${this.api}ventas/periodos`);
     }
 
-    obtenerVentas(token: string, periodo: string): Observable<ICustomDataResponse<Venta[]>>{
-        return this.http.post<ICustomDataResponse<Venta[]>>(`${this.api}ventas/obtener`, {token: token, periodo: periodo});
+    obtenerVentas(periodo: string): Observable<ICustomDataResponse<Venta[]>>{
+        return this.http.post<ICustomDataResponse<Venta[]>>(`${this.api}ventas/obtener`, {periodo: periodo});
     }
 
 
-    importarVentas(token: string, periodo: string): Observable<ICustomResponse> {
+    importarVentas(periodo: string): Observable<ICustomResponse> {
         return this.http.post<ICustomResponse>(
             `${this.api}ventas/importar`,{
-                token: token,
                 periodo: periodo
             }
         );

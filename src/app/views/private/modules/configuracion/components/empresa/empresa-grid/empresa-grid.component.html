@@ -1,14 +1,23 @@
-<p-card header="Mis Empresas">
+<p-card header="{{nombreEmpresa}}">
     <p-table [value]="[]" 
+        #tbl_empresas
         styleClass="p-datatable-gridlines" 
         sortField="codigo" [sortOrder]="-1" [tableStyle]="{ 'min-width': '60rem' }">
         <ng-template pTemplate="caption">
-            <div class="flex justify-content-between flex-column sm:flex-row">
-                <p-button label="Nuevo" (click)="onNuevoClick()" />
-                <span class="p-input-icon-left mb-2">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar..." class="w-full"/>
-                </span>
+            <div class="grid grid-cols-2">
+                <div class="flex justify-start">
+                    <button pButton label="Nuevo Local" class="p-button-outlined" icon="pi pi-file-import" (click)="onNuevoClick()"></button>
+                </div>
+                <div class="flex justify-end ">
+                    <p-iconfield iconPosition="left" class="ml-auto">
+                        <p-inputicon>
+                            <i class="pi pi-search"></i>
+                        </p-inputicon>
+                        <input pInputText type="text" [(ngModel)]="globalFilter"
+                            (ngModelChange)="tbl_empresas.filterGlobal(globalFilter, 'contains')"
+                            [ngModelOptions]="{standalone: true}" placeholder="Buscar..." />
+                    </p-iconfield>
+                </div>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -16,14 +25,14 @@
                 <th pSortableColumn="codigo">
                     Código <p-sortIcon field="codigo" />
                 </th>
-                <th pSortableColumn="ruc">
-                    Ruc <p-sortIcon field="ruc" />
+                <th pSortableColumn="nombre">
+                    Dirección <p-sortIcon field="nombre" />
                 </th>
-                <th pSortableColumn="razon_social">
-                    Razón Social <p-sortIcon field="razon_social" />
+                <th pSortableColumn="direccion">
+                    Dirección <p-sortIcon field="direccion" />
                 </th>
-                <th pSortableColumn="plan">
-                    Plan Actual <p-sortIcon field="plan" />
+                <th pSortableColumn="series">
+                    Series <p-sortIcon field="series" />
                 </th>
                 <th pSortableColumn="estado">
                     Estado <p-sortIcon field="estado" />
@@ -36,10 +45,16 @@
             <tr>
                 <td>{{ product.code }}</td>
                 <td>{{ product.name }}</td>
-                <td>{{ product.price | currency : 'USD' }}</td>
+                <td>{{ product.price }}</td>
                 <td>{{ product.category }}</td>
                 <td>{{ product.quantity }}</td>
             </tr>
         </ng-template>
+        <ng-template #emptymessage>
+            <tr>
+                <td colspan="9">No no encontraron locales registrados.</td>
+            </tr>
+        </ng-template>
     </p-table>
 </p-card>
+

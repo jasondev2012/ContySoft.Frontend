@@ -10,10 +10,10 @@ export interface RegisterRequest{
 }
 
 export interface RegisterModel{
-    cuenta: DatosCuenta;
-    empresa: DatosEmpresa;
-    pago: DatosPago;
-    plan: DatosPlan
+    cuenta?: DatosCuenta;
+    empresa?: DatosEmpresa;
+    pago?: DatosPago;
+    plan?: DatosPlan
 }
 export interface DatosCuenta{
     usuario: string;

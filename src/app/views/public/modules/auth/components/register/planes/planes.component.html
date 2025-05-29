@@ -3,11 +3,11 @@
         <ng-template pTemplate="title"> Planes </ng-template>
         <ng-template pTemplate="subtitle"> Seleccione el plan que más se acomode a sus necesidades </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid flex">
-                <div class="col-12 sm:col-6 md:col-4 flex justify-content-center">
+            <div class="grid grid-cols-12">
+                <div class="col-span-12 sm:col-span-6 md:col-span-4">
                     <p-card header="Gratis" subheader="Sin costo" [styleClass]="planSeleccionado == 1 ? 'card-highlight card-width' : 'card-width'">
                         <ng-template pTemplate="header">
-                            <img alt="Card" src="assets/images/free-plan.svg" style="max-height: 150px;" />
+                            <img alt="Card" src="assets/layout/images/free-plan.svg" style="max-height: 150px;" />
                         </ng-template>
                         <p>
                             Lorem ipsum dolor sit amet...
@@ -19,10 +19,10 @@
                         </ng-template>
                     </p-card>
                 </div>
-                <div class="col-12 sm:col-6 md:col-4 flex justify-content-center">
+                <div class="col-span-12 sm:col-span-6 md:col-span-4">
                     <p-card header="Pro" subheader="S/60 por mes" [styleClass]="planSeleccionado == 0 || planSeleccionado == 2 ? 'card-highlight card-width' : 'card-width'">
                         <ng-template pTemplate="header">
-                            <img alt="Card" src="assets/images/pro-plan.svg" style="max-height: 150px;" />
+                            <img alt="Card" src="assets/layout/images/pro-plan.svg" style="max-height: 150px;" />
                         </ng-template>
                         <p>
                             Lorem ipsum dolor sit amet...
@@ -34,10 +34,10 @@
                         </ng-template>
                     </p-card>
                 </div>
-                <div class="col-12 sm:col-6 md:col-4 flex justify-content-center">
+                <div class="col-span-12 sm:col-span-6 md:col-span-4">
                     <p-card header="Básico" subheader="S/30 por mes" [styleClass]="planSeleccionado == 3 ? 'card-highlight card-width' : 'card-width'">
                         <ng-template pTemplate="header">
-                            <img alt="Card" src="assets/images/basic-plan.svg" style="max-height: 150px;" />
+                            <img alt="Card" src="assets/layout/images/basic-plan.svg" style="max-height: 150px;" />
                         </ng-template>
                         <p>
                             Lorem ipsum dolor sit amet...
@@ -52,9 +52,14 @@
             </div>
         </ng-template>
         <ng-template pTemplate="footer">
-            <div class="grid grid-nogutter justify-content-between">
-                <p-button label="Atrás" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
-                <p-button label="Siguiente" (onClick)="nextPage()" [disabled]="!(planSeleccionado > 0)" icon="pi pi-angle-right" iconPos="right"></p-button>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="flex justify-start">
+                    <p-button label="Atrás" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
+                </div>
+                <div class="flex justify-end">
+                <!-- <p-button label="Siguiente" (onClick)="nextPage()" [disabled]="!(planSeleccionado > 0)" icon="pi pi-angle-right" iconPos="right"></p-button> -->
+                    <p-button label="Siguiente" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+                </div>
             </div>
         </ng-template>
     </p-card>

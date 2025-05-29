@@ -12,23 +12,11 @@ import { PanelModule } from 'primeng/panel';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
 
-const PRIMENG_MODULES = [
-    CardModule,
-    TableModule,
-    InputTextModule,
-    ButtonModule,
-    DividerModule,
-    DropdownModule,
-    PanelModule,
-    InputNumberModule,
-    FormsModule
-]
 @NgModule({
 	imports: [
-        ...PRIMENG_MODULES,
 		CommonModule,
         CalculoImpuestosRoutingModule
 	],
-	declarations: [CalculoImpuestosFormComponent]
+	declarations: []
 })
 export class CalculoImpuestosModule { }

@@ -3,33 +3,38 @@
         <ng-template pTemplate="title"> Información de Pago </ng-template>
         <ng-template pTemplate="subtitle"> Ingrese los datos necesarios para realizar el cobro de la subscripción </ng-template>
         <ng-template pTemplate="content">
-            <div class="p-fluid formgrid grid">
-                <div class="field col-12">
+            <div class="grid grid-cols-12">
+                <div class="col-span-12 mb-2">
                     <label for="class">Nombre del titular de la tarjeta</label>
-                    <input type="text" formControlName="nombre_titular" pInputText />
+                    <input type="text" class="w-full" formControlName="nombre_titular" pInputText />
                 </div>
-                <div class="field col-12">
+                <div class="col-span-12 mb-2">
                     <label for="class">Correo del titular</label>
-                    <input type="text" formControlName="correo_titular" pInputText />
+                    <input type="text" class="w-full" formControlName="correo_titular" pInputText />
                 </div>
-                <div class="field col-8">
+                <div class="col-span-8 mb-2">
                     <label id="number" for="lastname">Número de la tarjeta débito/crédito</label>
-                    <p-inputMask inputId="number" formControlName="numero_tarjeta" mask="9999-9999-9999-9999" ></p-inputMask>
+                    <p-inputMask inputId="number" styleClass="w-full" formControlName="numero_tarjeta" mask="9999-9999-9999-9999" ></p-inputMask>
                 </div>
-                <div class="field col-2">
+                <div class="col-span-2 mb-2">
                     <label id="date" for="date">F. Venc.</label>
-                    <p-inputMask inputId="date" formControlName="fecha_vencimiento" mask="99/99" ></p-inputMask>
+                    <p-inputMask inputId="date" styleClass="w-full" formControlName="fecha_vencimiento" mask="99/99" ></p-inputMask>
                 </div>
-                <div class="field col-2">
+                <div class="col-span-2 mb-2">
                     <label for="cvv">CVV</label>
-                    <p-inputMask id="cvv" formControlName="cvv" mask="999"></p-inputMask>
+                    <p-inputMask id="cvv" styleClass="w-full" formControlName="cvv" mask="999"></p-inputMask>
                 </div>
             </div>
         </ng-template>
         <ng-template pTemplate="footer">
-            <div class="grid grid-nogutter justify-content-between">
-                <p-button label="Atrás" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
-                <p-button label="Siguiente" (onClick)="nextPage()" [disabled]="!formValid" icon="pi pi-angle-right" iconPos="right"></p-button>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="flex justify-start">
+                    <p-button label="Atrás" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
+                </div>
+                <div class="flex justify-end">
+                    <!-- <p-button label="Siguiente" (onClick)="nextPage()" [disabled]="!formValid" icon="pi pi-angle-right" iconPos="right"></p-button> -->
+                    <p-button label="Siguiente" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+                </div>
             </div>
         </ng-template>
     </p-card>

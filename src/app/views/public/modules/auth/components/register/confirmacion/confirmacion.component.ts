@@ -2,20 +2,26 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterAppService } from 'src/app/common/services/register-app.service';
 import { RegisterModel } from 'src/app/interfaces/auth/register.interface';
+import { Inject } from '@angular/core';
+import { Card } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
-  selector: 'app-confirmacion',
-  templateUrl: './confirmacion.component.html',
-  styleUrl: './confirmacion.component.scss'
+    selector: 'app-confirmacion',
+    templateUrl: './confirmacion.component.html',
+    styleUrl: './confirmacion.component.scss',
+    standalone: true,
+    imports: [Card, ButtonModule]
 })
 export class ConfirmacionComponent {
   informacionRegistro: RegisterModel
-  constructor(private router: Router,
+  constructor(@Inject(Router) public router: Router,
               private registerAppService: RegisterAppService
-  ) {}
+  ) {
+      this.informacionRegistro = this.registerAppService.informacionRegistro;
+    }
 
   ngOnInit() {
-      this.informacionRegistro = this.registerAppService.informacionRegistro;
       if(!this.informacionRegistro?.cuenta){
         this.router.navigate(['auth', 'registro', 'cuenta']);
         return;

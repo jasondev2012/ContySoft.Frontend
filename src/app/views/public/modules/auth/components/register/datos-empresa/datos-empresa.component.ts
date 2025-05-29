@@ -1,21 +1,50 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs/internal/operators/finalize';
-import { ConsultaRucService } from 'src/app/common/http/consulta-ruc.service';
-import { LoadingService } from 'src/app/common/services/loading.service';
-import { RegisterAppService } from 'src/app/common/services/register-app.service';
-import { SessionService } from 'src/app/common/services/sesion.service';
-import { DatosEmpresa, RegisterModel } from 'src/app/interfaces/auth/register.interface';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
-import { RegisterService } from 'src/app/services/auth/register.service';
-import { rucValidator } from 'src/app/utils/abstrac-control/validaciones';
+import { Inject } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { DividerModule } from 'primeng/divider';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
+import { PanelModule } from 'primeng/panel';
+import { PasswordModule } from 'primeng/password';
+import { StepsModule } from 'primeng/steps';
+import { TableModule } from 'primeng/table';
+import { CommonModule } from '@angular/common';
+import { ConsultaRucService } from '../../../../../../../common/http/consulta-ruc.service';
+import { LoadingService } from '../../../../../../../common/services/loading.service';
+import { RegisterAppService } from '../../../../../../../common/services/register-app.service';
+import { SessionService } from '../../../../../../../common/services/sesion.service';
+import { DatosEmpresa } from '../../../../../../../interfaces/auth/register.interface';
+import { LayoutService } from '../../../../../../../layout/service/layout.service';
+import { RegisterService } from '../../../../../../../services/auth/register.service';
+import { rucValidator } from '../../../../../../../utils/abstrac-control/validaciones';
 
 @Component({
     selector: 'app-datos-empresa',
     templateUrl: './datos-empresa.component.html',
     styleUrl: './datos-empresa.component.scss',
+    standalone: true,
+    imports: [    
+        CardModule,
+        TableModule,
+        InputTextModule,
+        ButtonModule,
+        DividerModule,
+        DropdownModule,
+        PanelModule,
+        InputNumberModule,
+        StepsModule,
+        InputMaskModule,
+        PasswordModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule]
 })
 export class DatosEmpresaComponent {
     personalInformation: any;
@@ -27,14 +56,14 @@ export class DatosEmpresaComponent {
         return this.registroForm.valid;
     }
     public registroForm: FormGroup;
-    constructor(private router: Router,
+    constructor(@Inject(Router) public router: Router,
                 public layoutService: LayoutService,
                 public messageService: MessageService,
                 public registerService: RegisterService,
                 private loadingService: LoadingService,
                 private consultaRucService: ConsultaRucService,
                 private sessionService: SessionService,
-                private fb: FormBuilder,
+                @Inject(FormBuilder) public fb: FormBuilder,
                 private registerAppService: RegisterAppService
     ) {
         this.registroForm = this.fb.group({
@@ -96,41 +125,41 @@ export class DatosEmpresaComponent {
     markFormGroupTouched(formGroup: FormGroup) {
         Object.keys(formGroup.controls).forEach((controlName) => {
             const control = formGroup.get(controlName);
-            control.markAsTouched();
-            control.markAsDirty();
+            control?.markAsTouched();
+            control?.markAsDirty();
         });
     }
     onRucBlur() {
         let rucControl = this.registroForm.get('ruc');
-        if (rucControl.valid) {
+        if (rucControl?.valid) {
             //this.loadingService.show();
-            let ruc = rucControl.value;
+            let ruc = rucControl?.value;
             if (ruc.startsWith('10')) {
-                this.registroForm.get('tipo_persona').setValue('NATURAL');
+                this.registroForm.get('tipo_persona')?.setValue('NATURAL');
             } else if (ruc.startsWith('20')) {
-                this.registroForm.get('tipo_persona').setValue('JURÍDICA');
+                this.registroForm.get('tipo_persona')?.setValue('JURÍDICA');
             } else {
-                this.registroForm.get('tipo_persona').setValue(null);
+                this.registroForm.get('tipo_persona')?.setValue(null);
             }
             this.consultaRucService
                 .busquedaRuc(ruc)
                 .pipe(finalize(() => this.loadingService.hide()))
                 .subscribe({
-                    next: (res) => {
+                    next: (res: any) => {
                         this.ruc_en_uso_message = res.message;
                         this.ruc_en_uso = !res.success;
                         if(res.success){
-                            this.registroForm.get('razon_social').setValue(res.data.razonSocial);
+                            this.registroForm.get('razon_social')?.setValue(res.data.razonSocial);
                         }else{
-                            this.registroForm.get('razon_social').setValue(null);
+                            this.registroForm.get('razon_social')?.setValue(null);
                         }
 
                     },
-                    error: (err) => {
+                    error: (err: any) => {
                         console.log(err);
                         this.registroForm
                             .get('razon_social')
-                            .setValue('SIN DOMINIO S.A.C');
+                            ?.setValue('SIN DOMINIO S.A.C');
                     },
                 });
         }

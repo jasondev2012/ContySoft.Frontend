@@ -5,12 +5,22 @@ import { finalize } from 'rxjs';
 import { LoadingService } from 'src/app/common/services/loading.service';
 import { SessionService } from 'src/app/common/services/sesion.service';
 import { LoginRequest } from 'src/app/interfaces/auth/login.interface';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { LoginService } from 'src/app/services/auth/login.service';
+import { Inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { LayoutService } from 'src/app/layout/service/layout.service';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { PasswordModule } from 'primeng/password';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
+    standalone: true,
+    imports: [FormsModule, ButtonModule, CheckboxModule, InputTextModule, IconFieldModule, InputIconModule, PasswordModule]
 })
 export class LoginComponent implements OnInit {
     recordarEmail: boolean = false;
@@ -20,7 +30,7 @@ export class LoginComponent implements OnInit {
 
     constructor(
         public layoutService: LayoutService,
-        private router: Router,
+        @Inject(Router) public router: Router,
         private loginService: LoginService,
         private loadingService: LoadingService,
         private messageService: MessageService,
@@ -32,7 +42,7 @@ export class LoginComponent implements OnInit {
         let recEmail = localStorage.getItem('REC_EMAIL');
         if (recEmail && recEmail.toUpperCase() == 'TRUE') {
             let email = localStorage.getItem('EMAIL');
-            this.usuario = email;
+            this.usuario = email || '';
             this.recordarEmail = true;
         }
     }
@@ -81,8 +91,16 @@ export class LoginComponent implements OnInit {
                     localStorage.removeItem('EMAIL');
                     localStorage.removeItem('REC_EMAIL');
                 }
-                this.sessionService.setSession(res);
-                this.router.navigate(['/']); // Redirige al home
+                if(res.success){
+                    this.sessionService.setSession(res.data);
+                    this.router.navigate(['/']); // Redirige al home
+                }else{
+                    this.messageService.add({
+                        severity: 'warn',
+                        summary: 'Validación!',
+                        detail: 'Usuario y/o contraseña incorrecta.',
+                    });
+                }
             },
             error: (err) => {
                 //console.error('Error:', err);

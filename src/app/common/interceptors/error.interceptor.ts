@@ -1,56 +1,50 @@
-import { Injectable } from '@angular/core';
 import {
-    HttpEvent,
-    HttpInterceptor,
-    HttpHandler,
-    HttpRequest,
-    HttpResponse,
-    HttpErrorResponse,
-    HttpEventType
+  HttpInterceptorFn,
+  HttpRequest,
+  HttpHandlerFn,
+  HttpEvent,
+  HttpResponse,
+  HttpErrorResponse,
+  HttpEventType
 } from '@angular/common/http';
-import { Observable, tap, throwError } from 'rxjs';
+import { inject } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import Swal from 'sweetalert2';
+import { tap, throwError } from 'rxjs';
+import { SessionService } from '../services/sesion.service';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private messageService: MessageService) {}
+export const errorInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn) => {
+  const messageService = inject(MessageService);
+  const sessionService = inject(SessionService);
 
-    intercept(
-        req: HttpRequest<any>,
-        next: HttpHandler
-    ): Observable<HttpEvent<any>> {
-        return next.handle(req).pipe(
-            tap({
-                next: (event) => {
-                    // Filtra eventos para actuar solo cuando el evento es una respuesta completa
-                    if (event.type === HttpEventType.Response) {
-
-                        // Verificar si es una respuesta HttpResponse y "Success" es false
-                        const response = event as HttpResponse<any>;
-                        if (response.body?.success === false && response.body?.code != 200) {
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error ('+ response.body?.code +')',
-                                detail: response.body?.message,
-                            });
-                            // Lanzar un error para detener el flujo
-                            throw throwError(() => new Error(response.body?.message || 'Error en la respuesta'));
-                        }
-                    }
-                },
-                error: (error: HttpErrorResponse) => {
-                    console.log(error);
-                    // Manejamos los errores HTTP
-                    // this.messageService.add({
-                    //     severity: 'error',
-                    //     summary: 'Ups!',
-                    //     detail: 'Error en la solicitud',
-                    // });
-                    return throwError(() => error);
-                },
-            })
-        );
-    }
-}
+  return next(req).pipe(
+    tap({
+      next: (event: HttpEvent<any>) => {
+        if (event.type === HttpEventType.Response) {
+          const response = event as HttpResponse<any>;
+          if (response.body?.success === false && response.body?.code !== 200) {
+            messageService.add({
+              severity: 'error',
+              summary: 'Error (' + response.body.code + ')',
+              detail: response.body.message,
+            });
+            throw new Error(response.body.message || 'Error en la respuesta');
+          }
+        }
+      },
+      error: (error: HttpErrorResponse) => {
+        if (error.status === 401) {
+          Swal.fire({
+            title: 'Ups!',
+            text: 'Tu sesión caducó, por favor vuelve a iniciar sesión.',
+            icon: 'warning',
+            confirmButtonText: 'OK',
+          }).then(() => {
+            sessionService.endSession(); // 👈 Aquí se ejecuta tu servicio
+          });
+        }
+        return throwError(() => error);
+      }
+    })
+  );
+};

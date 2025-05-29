@@ -1,64 +1,61 @@
-<div class="grid flex w-full min-h-screen mx-0">
-    <div class="col-12 md:col-4 flex justify-content-center align-items-center p-0">
-        <div class="grid mx-0">
-            <div class="col-12 flex justify-content-center">
-                <img src="assets/layout/images/logo-login.png" alt="ContySoft logo" class="w-10rem flex-shrink-0">
+<div class="grid grid-cols-12 w-full min-h-screen mx-0">
+    <div class="col-span-12 md:col-span-4 justify-content-center align-items-center p-0">
+        <div class="grid grid-cols-12 mx-0">
+            <div class="col-span-12 flex justify-center items-center">
+                <img src="assets/layout/images/logo-login.png" alt="ContySoft logo" class="w-10rem">
             </div>
-            <div class="col-12 flex justify-content-center flex-column gap-1 text-center mb-5">
+            <div class="col-span-12 flex justify-center items-center gap-1 text-center mb-5">
                 <h5 class="text-3xl">Bienvenido!</h5>
+            </div>
+            <div class="col-span-12 flex justify-center items-center gap-1 text-center mb-5">
                 <p class="text-xl">Por favor, inicia sesión para continuar.</p>
             </div>
-            <div class="mx-0 grid col-12 flex justify-content-center">
-                <div class="p-0 md:col-9 lg:col-8 sm:col-10 col-12 flex flex-column gap-2">
-                    <label for="email" class="text-xl" style="font-weight: bolder;">Email</label>
-                    <span class="p-input-icon-left w-full">
-                        <i class="pi pi-at"></i>
-                        <input
-                        pInputText
-                        placeholder="Email"
-                        id="email"
-                        [(ngModel)]="usuario"
-                        class="w-full p-inputtext-lg"
-                        aria-describedby="email-help" />
-                    </span>
+            <div class="mx-0 col-span-12 flex justify-center my-4">
+                <div class="w-full max-w-md"> <!-- max-w-md = max-width: 28rem -->
+                    <!-- Aquí va el input o botón con w-full -->
+                    <label for="email" class="text-xl font-bold">Email</label>
+                    <p-iconfield>
+                        <input class="w-full" pInputText id="email" [(ngModel)]="usuario" placeholder="Email"
+                            pSize="large" />
+                        <p-inputicon class="pi pi-at" />
+                    </p-iconfield>
                 </div>
             </div>
-            <div class="mx-0 grid col-12 flex justify-content-center">
-                <div class="p-0 md:col-9 lg:col-8 sm:col-10 col-12 flex flex-column gap-2">
-                    <label for="password" class="text-xl" style="font-weight: bolder;">Contraseña</label>
-                    <span class="p-input-icon-left w-full">
-                        <i class="pi pi-eye-slash"></i>
-                        <input
-                        pInputText
-                        placeholder="Contraseña"
-                        id="password"
-                        type="password"
-                        (keydown)="onKeyDown($event)"
-                        [(ngModel)]="password"
-                        class="w-full p-inputtext-lg"
-                        aria-describedby="password-help" />
-                    </span>
+            <div class="mx-0 col-span-12 flex justify-center my-4">
+                <div class="w-full max-w-md">
+                    <label for="password" class="text-xl font-bold w-full block">Contraseña</label>
+                    <p-password (keydown.enter)="onIniciarSesionClick()" styleClass="w-full" inputStyleClass="w-full" [feedback]="false" [(ngModel)]="password" size="large" placeholder="Contraseña"
+                        [toggleMask]="true"></p-password>
                 </div>
             </div>
-            <div class="mx-0 grid col-12 flex justify-content-center">
-                <div class="p-0 md:col-9 lg:col-8 sm:col-10 col-12 flex align-items-center justify-content-between mb-5 gap-5">
-                    <div class="flex align-items-center">
-                        <p-checkbox id="rememberme1" [(ngModel)]="recordarEmail" [binary]="true" styleClass="mr-2"></p-checkbox>
+
+
+            <div class="mx-0 col-span-12 flex justify-center my-4">
+                <div class="w-full max-w-md flex flex-col md:flex-row md:justify-between md:items-center">
+                    <div class="flex items-center mb-2 md:mb-0">
+                        <p-checkbox id="rememberme1" [(ngModel)]="recordarEmail" [binary]="true"
+                            styleClass="mr-2"></p-checkbox>
                         <label for="rememberme1">Recordar email</label>
                     </div>
-                    <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Olvidaste tu contraseña?</a>
+                    <a class="font-medium no-underline text-center md:text-right cursor-pointer text-primary"
+                        style="color: var(--primary-color)">
+                        Olvidaste tu contraseña?
+                    </a>
                 </div>
             </div>
-            <div class="mx-0 grid col-12 flex justify-content-center">
-                <div class="p-0 md:col-9 lg:col-8 sm:col-10 col-12 flex flex-column gap-2">
-                    <p-button (onClick)="onIniciarSesionClick()" label="Iniciar Sesión" styleClass="mt-3 w-full p-3 text-xl" severity="success" />
-                    <p-button (onClick)="onCrearCuentaClick()" label="Crear cuenta" styleClass="mt-3 w-full p-3 text-xl" severity="secondary" />
+
+            <div class="mx-0 col-span-12 flex justify-center">
+                <div class="w-full max-w-md space-y-3">
+                    <p-button (onClick)="onIniciarSesionClick()" label="Iniciar Sesión"
+                        styleClass="w-full p-3 text-xl my-4"></p-button>
+                    <p-button (onClick)="onCrearCuentaClick()" label="Crear cuenta" styleClass="w-full p-3 text-xl my-4"
+                        severity="secondary"></p-button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-12 md:col-8 flex justify-content-center p-0 hide-on-md" style="background-color: #fff;">
-        <img src="assets/images/background.svg" class="width-img" alt="ContySoft logo">
+    <div class="col-span-12 md:col-span-8 justify-content-center p-0 hide-on-md" style="background-color: #fff;">
+        <img src="assets/layout/images/background.svg" class="width-img" alt="ContySoft logo">
     </div>
 </div>

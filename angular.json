@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "contysoft-ng": {
+        "sakai-ng": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -15,19 +15,19 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-devkit/build-angular:application",
                     "options": {
-                        "outputPath": "dist/contysoft-ng",
+                        "outputPath": "dist/sakai-ng",
                         "index": "src/index.html",
-                        "main": "src/main.ts",
+                        "browser": "src/main.ts",
                         "polyfills": [
                             "zone.js"
                         ],
                         "tsConfig": "tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                        "src/favicon.ico",
+                        "src/assets"
                         ],
                         "styles": [
                             "src/styles.scss"
@@ -51,12 +51,9 @@
                             "outputHashing": "all"
                         },
                         "development": {
-                            "buildOptimizer": false,
                             "optimization": false,
-                            "vendorChunk": true,
                             "extractLicenses": false,
-                            "sourceMap": true,
-                            "namedChunks": true
+                            "sourceMap": true
                         }
                     },
                     "defaultConfiguration": "production"
@@ -65,19 +62,16 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "buildTarget": "contysoft-ng:build:production"
+                            "buildTarget": "sakai-ng:build:production"
                         },
                         "development": {
-                            "buildTarget": "contysoft-ng:build:development"
+                            "buildTarget": "sakai-ng:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
                 },
                 "extract-i18n": {
-                    "builder": "@angular-devkit/build-angular:extract-i18n",
-                    "options": {
-                        "buildTarget": "contysoft-ng:build"
-                    }
+                    "builder": "@angular-devkit/build-angular:extract-i18n"
                 },
                 "test": {
                     "builder": "@angular-devkit/build-angular:karma",
@@ -87,11 +81,12 @@
                             "zone.js/testing"
                         ],
                         "tsConfig": "tsconfig.spec.json",
-                        "karmaConfig": "karma.conf.js",
                         "inlineStyleLanguage": "scss",
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                            {
+                                "glob": "**/*",
+                                "input": "public"
+                            }
                         ],
                         "styles": [
                             "src/styles.scss"
@@ -103,6 +98,6 @@
         }
     },
     "cli": {
-      "analytics": "bbaf424f-5f37-4fa0-a7c4-647312c9fabd"
+      "analytics": false
     }
 }

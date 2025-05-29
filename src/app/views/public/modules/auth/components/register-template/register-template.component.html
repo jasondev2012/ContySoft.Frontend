@@ -1,7 +1,7 @@
 <form [formGroup]="registroForm" class="overflow-hidden">
-    <div class="grid flex justify-content-center px-3">
+    <div class="flex justify-content-center px-3">
         <div class="col-12 flex justify-content-center mt-3">
-            <img src="assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" alt="ContySoft logo" class="mb-5 w-6rem flex-shrink-0">
+            <img src="assets/layout/images/{{!layoutService._config.darkTheme ? 'logo-dark' : 'logo-white'}}.svg" alt="ContySoft logo" class="mb-5 w-6rem flex-shrink-0">
         </div>
         <div class="col-12 sm:col-10 md:col-8 lg:col-6" style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
             <div class="w-full surface-card py-8 px-4 md:px-6 lg:px-8" style="border-radius:53px">
@@ -21,7 +21,7 @@
                         (blur)="onRucBlur()"
                         maxlength="11"
                         [ngClass]="{
-                            'ng-invalid ng-dirty': registroForm.get('ruc').invalid && (registroForm.get('ruc').dirty || registroForm.get('ruc').touched)
+                            'ng-invalid ng-dirty': registroForm.get('ruc')?.invalid && (registroForm.get('ruc')?.dirty || registroForm.get('ruc')?.touched)
                          }" class="w-full" style="padding:1rem">
                     </div>
                     <div class="col-12 lg:col-6">
@@ -36,7 +36,7 @@
                         <label for="usuario_sol" class="block text-900 text-xl font-medium mb-2">Usuario Sol</label>
                         <input id="usuario_sol"
                         [ngClass]="{
-                            'ng-invalid ng-dirty': registroForm.get('usuario_sol').invalid && (registroForm.get('usuario_sol').dirty || registroForm.get('usuario_sol').touched)
+                            'ng-invalid ng-dirty': registroForm.get('usuario_sol')?.invalid && (registroForm.get('usuario_sol')?.dirty || registroForm.get('usuario_sol')?.touched)
                          }"
                          formControlName="usuario_sol" type="text" placeholder="Usuario Sol" pInputText class="w-full ng-invalid ng-dirty" style="padding:1rem">
                     </div>
@@ -45,8 +45,8 @@
                         <p-password id="password_sol"
                         [feedback]="false"
                         formControlName="password_sol" placeholder="Contraseña" [toggleMask]="true" styleClass="mb-5 w-full"
-                        [inputStyleClass]="registroForm.get('password_sol').invalid && 
-                                            (registroForm.get('password_sol').dirty || registroForm.get('password_sol').touched) ? 
+                        [inputStyleClass]="registroForm.get('password_sol')?.invalid && 
+                                            (registroForm.get('password_sol')?.dirty || registroForm.get('password_sol')?.touched) ? 
                                             'ng-invalid ng-dirty p-3 w-full' : 'p-3 w-full'"
                         ></p-password>
                     </div>
@@ -57,7 +57,7 @@
                         <label for="usuario" class="block text-900 text-xl font-medium mb-2">Email</label>
                         <input id="usuario"
                         [ngClass]="{
-                            'ng-invalid ng-dirty': registroForm.get('usuario').invalid && (registroForm.get('usuario').dirty || registroForm.get('usuario').touched)
+                            'ng-invalid ng-dirty': registroForm.get('usuario')?.invalid && (registroForm.get('usuario')?.dirty || registroForm.get('usuario')?.touched)
                         }"
                         formControlName="usuario" type="email" placeholder="Email" pInputText class="w-full ng-invalid ng-dirty" style="padding:1rem">
                     </div>
@@ -76,11 +76,11 @@
                         mediumLabel="Fácil" 
                         strongLabel="Dificil"
                         [ngClass]="{
-                            'ng-invalid ng-dirty': registroForm.get('password').invalid && (registroForm.get('password').dirty || registroForm.get('password').touched)
+                            'ng-invalid ng-dirty': registroForm.get('password')?.invalid && (registroForm.get('password')?.dirty || registroForm.get('password')?.touched)
                          }"
                         formControlName="password" placeholder="Contraseña" [toggleMask]="true" styleClass="mb-5 w-full" 
-                        [inputStyleClass]="registroForm.get('password').invalid && 
-                                            (registroForm.get('password').dirty || registroForm.get('password').touched) ? 
+                        [inputStyleClass]="registroForm.get('password')?.invalid && 
+                                            (registroForm.get('password')?.dirty || registroForm.get('password')?.touched) ? 
                                             'ng-invalid ng-dirty p-3 w-full' : 'p-3 w-full'" 
                         ></p-password>
                     </div>

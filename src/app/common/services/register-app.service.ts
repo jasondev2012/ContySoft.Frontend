@@ -5,10 +5,10 @@ import { RegisterModel } from 'src/app/interfaces/auth/register.interface';
 @Injectable()
 export class RegisterAppService {
     informacionRegistro: RegisterModel = {
-        cuenta: null,
-        pago: null,
-        empresa: null,
-        plan: null
+        cuenta: undefined,
+        pago: undefined,
+        empresa: undefined,
+        plan: undefined
     };
 
     private registroCompletado = new Subject<any>();

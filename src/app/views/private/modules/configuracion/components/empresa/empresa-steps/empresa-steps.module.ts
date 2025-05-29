@@ -15,20 +15,9 @@ import { EmpresaStepsRoutingModule } from './empresa-steps-routing.module';
 import { RouterModule } from '@angular/router';
 import { EmpresaPlanesComponent } from '../empresa-planes/empresa-planes.component';
 
-const PRIMENG_MODULES = [
-    CardModule,
-    TableModule,
-    InputTextModule,
-    ButtonModule,
-    DividerModule,
-    DropdownModule,
-    PanelModule,
-    InputNumberModule,
-    StepsModule
-];
 @NgModule({
-    imports: [...PRIMENG_MODULES, FormsModule, CommonModule, EmpresaStepsRoutingModule, ReactiveFormsModule],
-    declarations: [EmpresaFormComponent, EmpresaPlanesComponent],
-    exports: [RouterModule]
+    imports: [CommonModule, EmpresaStepsRoutingModule],
+    declarations: [],
+    exports: []
 })
 export class EmpresaStepsModule {}

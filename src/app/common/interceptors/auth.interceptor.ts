@@ -1,25 +1,29 @@
-// auth.interceptor.ts
-import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {
+  HttpInterceptorFn,
+  HttpRequest,
+  HttpHandlerFn,
+  HttpEvent
+} from '@angular/common/http';
+import { inject } from '@angular/core';
 import { SessionService } from '../services/sesion.service';
+import { Observable } from 'rxjs';
 
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-    constructor(private sessionService: SessionService) {}
+export const authInterceptor: HttpInterceptorFn = (
+  req: HttpRequest<any>,
+  next: HttpHandlerFn
+): Observable<HttpEvent<any>> => {
+  const sessionService = inject(SessionService);
+  const session = sessionService.getSession();
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const session = this.sessionService.getSession();
-        if (session && session.token) { // Verifica si hay un token en la sesión
-            const cloned = req.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${session.token}` // Agrega el token a la cabecera
-                }
-            });
 
-            return next.handle(cloned); // Envía la solicitud clonada
-        }
+  if (session && session.token) {
+    const cloned = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${session.token}`,
+      },
+    });
+    return next(cloned);
+  }
 
-        return next.handle(req); // Envía la solicitud original si no hay token
-    }
-}
+  return next(req);
+};

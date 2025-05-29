@@ -16,8 +16,8 @@ export class RegisterService {
         this.api = environment.api
     }
 
-    setRegistro(request: RegisterRequest): Observable<SessionResponse>{
-        return this.http.post<SessionResponse>(`${this.api}auth/registro`, request)
+    setRegistro(request: RegisterRequest): Observable<ICustomDataResponse<SessionResponse>>{
+        return this.http.post<ICustomDataResponse<SessionResponse>>(`${this.api}auth/registro`, request)
     }
     validarEmail(email: string): Observable<ICustomDataResponse<boolean>>{
         return this.http.get<ICustomDataResponse<boolean>>(`${this.api}auth/validar-email/${email}`)

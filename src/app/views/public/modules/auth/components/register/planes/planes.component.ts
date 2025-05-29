@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterAppService } from 'src/app/common/services/register-app.service';
-import { DatosPlan } from 'src/app/interfaces/auth/register.interface';
+import { Inject } from '@angular/core';
+import { CardModule } from 'primeng/card';
+import { RegisterAppService } from '../../../../../../../common/services/register-app.service';
+import { DatosPlan } from '../../../../../../../interfaces/auth/register.interface';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
-  selector: 'app-planes',
-  templateUrl: './planes.component.html',
-  styleUrl: './planes.component.scss'
+    selector: 'app-planes',
+    templateUrl: './planes.component.html',
+    styleUrl: './planes.component.scss',
+    standalone: true,
+    imports: [CardModule, ButtonModule]
 })
 export class PlanesComponent {
-  constructor(private router: Router,
+  constructor(@Inject(Router) public router: Router,
               private registerAppService: RegisterAppService) {}
   planSeleccionado: number = 0
   ngOnInit() {

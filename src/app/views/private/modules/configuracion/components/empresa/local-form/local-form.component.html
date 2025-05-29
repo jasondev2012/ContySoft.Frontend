@@ -1,0 +1,36 @@
+<form [formGroup]="localForm">
+    <div class="grid grid-cols-12">
+        <div class="col-span-12 lg:col-span-6 p-2">
+            <label for="codigo" class="font-bold">Código</label>
+            <input class="w-full block" pInputText id="codigo" formControlName="codigo" />
+        </div>
+        <div class="col-span-12 lg:col-span-6 p-2">
+            <label for="ruc" class="font-bold">Nombre</label>
+            <input class="w-full block" pInputText id="ruc" formControlName="nombre" />
+        </div>
+        <div class="col-span-12 lg:col-span-6 p-2">
+            <label for="direccion" class="font-bold">Dirección</label>
+            <input class="w-full block" pInputText id="direccion" formControlName="direccion" />
+        </div>
+        <div class="col-span-12 lg:col-span-6 p-2">
+            <label for="celuar" class="font-bold">Celular</label>
+            <input class="w-full block" pInputText id="celuar" formControlName="celuar" />
+        </div>
+        <div class="col-span-12 lg:col-span-6 p-2">
+            <label for="celuar" class="font-bold">Serie Factura</label>
+            <p-inputmask mask="F999-9999999999" styleClass="w-full" formControlName="serie_factura"
+                placeholder="F001-0000000000" />
+        </div>
+        <div class="col-span-12 lg:col-span-6 p-2">
+            <label for="celuar" class="font-bold">Serie Boleta</label>
+            <p-inputmask mask="B999-9999999999" styleClass="w-full" formControlName="serie_boleta"
+                placeholder="B001-0000000000" />
+        </div>
+    </div>
+    <div class="grid grid-cols-1">
+        <div class="flex justify-end p-2 gap-2">
+            <p-button label="Cancelar" (click)="closeDialog({ buttonType: 'Cancel' })" severity="danger" />
+            <p-button label="Guardar" />
+        </div>
+    </div>
+</form>

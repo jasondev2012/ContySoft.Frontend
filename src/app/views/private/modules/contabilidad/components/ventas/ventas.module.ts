@@ -11,24 +11,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 
-
-const PRIMENG_MODULES = [
-    CardModule,
-    TableModule,
-    InputTextModule,
-    ButtonModule,
-    FormsModule,
-    CheckboxModule,
-    DialogModule,
-    DropdownModule,
-    ReactiveFormsModule
-]
 @NgModule({
 	imports: [
-        ...PRIMENG_MODULES,
 		CommonModule,
 		VentasRoutingModule
 	],
-	declarations: [VentasGridComponent]
+	declarations: []
 })
 export class VentasModule { }

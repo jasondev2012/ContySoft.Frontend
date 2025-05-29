@@ -1,16 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { RegisterAppService } from 'src/app/common/services/register-app.service';
-import { DatosCuenta } from 'src/app/interfaces/auth/register.interface';
-import { RegisterService } from 'src/app/services/auth/register.service';
-import { passwordValidator } from 'src/app/utils/abstrac-control/validaciones';
+import { Inject } from '@angular/core';
+import { CardModule } from 'primeng/card';
+import { RegisterService } from '../../../../../../../services/auth/register.service';
+import { RegisterAppService } from '../../../../../../../common/services/register-app.service';
+import { DatosCuenta } from '../../../../../../../interfaces/auth/register.interface';
+import { passwordValidator } from '../../../../../../../utils/abstrac-control/validaciones';
+import { ButtonModule } from 'primeng/button';
+import { CommonModule, NgClass } from '@angular/common';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { PasswordModule } from 'primeng/password';
+import { InputTextModule } from 'primeng/inputtext';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
     selector: 'app-datos-cuenta',
     templateUrl: './datos-cuenta.component.html',
     styleUrl: './datos-cuenta.component.scss',
+    standalone: true,
+    imports: [ReactiveFormsModule, TooltipModule, FormsModule, CardModule, ButtonModule, PasswordModule, NgClass, CommonModule, InputTextModule, IconFieldModule, InputIconModule]  
 })
 export class DatosCuentaComponent implements OnInit {
     emailValido: boolean = false;
@@ -19,8 +30,8 @@ export class DatosCuentaComponent implements OnInit {
         return this.registroForm.valid;
     }
     public registroForm: FormGroup;
-    constructor(private router: Router,
-                private fb: FormBuilder,
+    constructor(@Inject(Router) public router: Router,
+                @Inject(FormBuilder) public fb: FormBuilder,
                 public messageService: MessageService,
                 private registerService: RegisterService,
                 private registerAppService: RegisterAppService) {
@@ -45,9 +56,9 @@ export class DatosCuentaComponent implements OnInit {
 
     onEmailBlur(){
         let email = this.registroForm.get('usuario');
-        if (email.valid){
-            this.registerService.validarEmail(email.value).subscribe({
-                next: res => {
+        if (email?.valid){
+            this.registerService.validarEmail(email?.value).subscribe({
+                next: (res:any) => {
                     this.emailValido = res.data;
                     this.emailEnUso = !res.data;
                 }
