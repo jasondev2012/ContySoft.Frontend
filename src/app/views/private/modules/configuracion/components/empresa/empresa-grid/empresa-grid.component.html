@@ -1,12 +1,73 @@
 <p-card header="{{nombreEmpresa}}">
-    <p-table [value]="[]" 
-        #tbl_empresas
-        styleClass="p-datatable-gridlines" 
-        sortField="codigo" [sortOrder]="-1" [tableStyle]="{ 'min-width': '60rem' }">
+    <div class="grid grid-cols-12" [formGroup]="empresaForm">
+        <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
+            <label for="codigo" class="font-bold">#RUC</label>
+            <input [appShowErrors]="empresaForm.get('ruc')" class="w-full block" formControlName="ruc" pInputText
+                id="ruc" />
+        </div>
+        <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
+            <label for="codigo" class="font-bold">Razón Social</label>
+            <input [appShowErrors]="empresaForm.get('razon_social')" class="w-full block" formControlName="razon_social"
+                pInputText id="razon_social" />
+        </div>
+        <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
+            <label for="codigo" class="font-bold">Usuario Sol</label>
+            <input [appShowErrors]="empresaForm.get('usuario_sol')" class="w-full block" formControlName="usuario_sol"
+                pInputText id="usuario_sol" />
+        </div>
+        <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
+            <label for="codigo" class="font-bold">Clave Sol</label>
+            <p-password [appShowErrors]="empresaForm.get('password_sol')" styleClass="w-full"
+                promptLabel="Ingrese una contraseña" inputStyleClass="w-full block" formControlName="password_sol"
+                placeholder="Clave Sol" [feedback]="false" [toggleMask]="true"></p-password>
+        </div>
+        <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
+            <label for="codigo" class="font-bold">Dirección</label>
+            <input [appShowErrors]="empresaForm.get('direccion')" class="w-full block" formControlName="direccion"
+                pInputText id="direccion" />
+        </div>
+        <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
+            <label for="codigo" class="font-bold">Departamento</label>
+            <p-select [appShowErrors]="empresaForm.get('id_departamento')" [options]="[]"
+                formControlName="id_departamento" optionLabel="name" placeholder="Selecciona un departamento"
+                class="w-full" />
+        </div>
+        <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
+            <label for="codigo" class="font-bold">Provincia</label>
+            <p-select [appShowErrors]="empresaForm.get('id_provincia')" [options]="[]" formControlName="id_provincia"
+                optionLabel="name" placeholder="Selecciona una provincia" class="w-full" />
+        </div>
+        <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
+            <label for="codigo" class="font-bold">Distrito</label>
+            <p-select [appShowErrors]="empresaForm.get('id_distrito')" [options]="[]" formControlName="id_distrito"
+                optionLabel="name" placeholder="Selecciona un distrito" class="w-full" />
+        </div>
+        <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
+            <label for="codigo" class="font-bold">Celular</label>
+            <p-inputmask [appShowErrors]="empresaForm.get('celular')" styleClass="w-full block" mask="+51-999999999"
+                formControlName="celular" placeholder="+51-999999999" />
+        </div>
+        <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
+            <label for="codigo" class="font-bold">Correo</label>
+            <input type="email" [appShowErrors]="empresaForm.get('correo')" class="w-full block"
+                formControlName="correo" pInputText id="correo" />
+        </div>
+        <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
+            <label for="codigo" class="font-bold">Plan</label>
+            <input class="w-full block" formControlName="plan" pInputText id="plan" />
+        </div>
+        <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2 flex flex-col justify-end">
+            <p-button label="Guardar" class="w-full" (click)="onGuardarClick()" />
+        </div>
+    </div>
+    <p-divider />
+    <p-table [value]="[]" #tbl_empresas styleClass="p-datatable-gridlines" sortField="codigo" [sortOrder]="-1"
+        [tableStyle]="{ 'min-width': '60rem' }">
         <ng-template pTemplate="caption">
             <div class="grid grid-cols-2">
                 <div class="flex justify-start">
-                    <button pButton label="Nuevo Local" class="p-button-outlined" icon="pi pi-file-import" (click)="onNuevoClick()"></button>
+                    <button pButton label="Nuevo Local" class="p-button-outlined" icon="pi pi-file-import"
+                        (click)="onNuevoClick()"></button>
                 </div>
                 <div class="flex justify-end ">
                     <p-iconfield iconPosition="left" class="ml-auto">
@@ -57,4 +118,3 @@
         </ng-template>
     </p-table>
 </p-card>
-
