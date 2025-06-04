@@ -8,15 +8,10 @@
             'IGV_IPM',
             'total',
             'estadoCP'
-        ]"
-        [tableStyle]="{ 'min-width': '60rem' }"
-        [paginator]="true"
-        [rows]="10"
-        responsiveLayout="scroll"
-        [rowsPerPageOptions]="[5,10,20,50,100]"
-        [showCurrentPageReport]="true"
-        currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} registro"
-        >
+        ]" [tableStyle]="{ 'min-width': '60rem' }" [paginator]="true" [rows]="10" responsiveLayout="scroll"
+        [rowsPerPageOptions]="[5,10,20,50,100]" [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} registro" rowGroupMode="subheader"
+        groupRowsBy="serieCP">
         <ng-template pTemplate="caption">
             <form [formGroup]="form" class="grid grid-cols-2">
                 <div class="flex justify-start align-middle">
@@ -27,10 +22,8 @@
                             'ng-dirty ng-invalid': form.controls['anio'].dirty && form.controls['anio'].invalid
                         }" formControlName="anio" class="ng-invalid ng-dirty mr-2" />
 
-                    <p-select [options]="mes" [showClear]="true" optionLabel="label"
-                        optionValue="value"
-                        (onChange)="onMesChange($event)"
-                        placeholder="Seleccionar" [ngClass]="{
+                    <p-select [options]="mes" [showClear]="true" optionLabel="label" optionValue="value"
+                        (onChange)="onMesChange($event)" placeholder="Seleccionar" [ngClass]="{
                         'ng-dirty ng-invalid': form.controls['mes'].dirty && form.controls['mes'].invalid
                     }" formControlName="mes" class="ng-invalid ng-dirty mr-2" />
                     <button pButton label="Cargar ventas" class="p-button-outlined p-5" (click)="cargarDatos()"
@@ -41,10 +34,8 @@
                         <p-inputicon>
                             <i class="pi pi-search"></i>
                         </p-inputicon>
-                        <input pInputText type="text" [(ngModel)]="globalFilter"
-                            (ngModelChange)="onFilterChange()"
-                             [ngModelOptions]="{standalone: true}"
-                            placeholder="Buscar..." />
+                        <input pInputText type="text" [(ngModel)]="globalFilter" (ngModelChange)="onFilterChange()"
+                            [ngModelOptions]="{standalone: true}" placeholder="Buscar..." />
                     </p-iconfield>
 
 
@@ -83,7 +74,23 @@
                 </th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-venta>
+        <ng-template #groupheader let-venta let-rowIndex="rowIndex" let-expanded="expanded">
+            <tr>
+                <td colspan="9">
+                    <button type="button" pButton pRipple [pRowToggler]="venta" text rounded plain class="mr-2"
+                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+                        <span class="font-bold ml-2">Ventas de la serie {{venta.serieCP}}</span>
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template #groupfooter let-venta>
+            <tr class="p-rowgroup-footer">
+                <td colspan="8" style="text-align: right">Total ventas de la serie {{venta.serieCP}}:</td>
+                <td>{{calculateCustomerTotal(venta.serieCP)}}</td>
+            </tr>
+        </ng-template>
+        <ng-template #expandedrow let-venta>
             <tr>
                 <td>{{ venta.periodo }}</td>
                 <td>{{ venta.razonSocial }}</td>

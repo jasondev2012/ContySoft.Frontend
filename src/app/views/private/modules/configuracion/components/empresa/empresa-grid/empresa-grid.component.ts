@@ -18,11 +18,17 @@ import { ShowErrorsDirective } from 'src/app/common/directives/show-errors.direc
 import { EmpresaService } from 'src/app/services/configuracion/empresa.service';
 import { PasswordModule } from 'primeng/password';
 import { EmpresaRequest } from 'src/app/common/interfaces/configuracion/empresa.interface';
-import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs';
 import { LoadingService } from 'src/app/common/services/loading.service';
 import { InputMaskModule } from 'primeng/inputmask';
-const PRIMG_NG = [InputMaskModule, PasswordModule, SelectModule, CardModule, TableModule, ButtonModule, DividerModule, InputTextModule, InputIconModule, IconFieldModule]
+import { CatalogoService } from 'src/app/services/catalogo/catalogo.service';
+import { ICatalogoGenerico } from 'src/app/interfaces/catalogo/catalogo.interface';
+import { TipoCatalogo } from 'src/app/common/enums/tipo_catalogo.enum';
+import { IEmpresaLocalList } from 'src/app/common/interfaces/configuracion/local.interface';
+import { BadgeModule } from 'primeng/badge';
+import { ICustomResponse } from 'src/app/common/interfaces/custom-response.interface';
+import { CustomMessageService } from 'src/app/common/services/custom-message.service';
+const PRIMG_NG = [BadgeModule, InputMaskModule, PasswordModule, SelectModule, CardModule, TableModule, ButtonModule, DividerModule, InputTextModule, InputIconModule, IconFieldModule];
 @Component({
     selector: 'app-empresa-grid',
     templateUrl: './empresa-grid.component.html',
@@ -36,7 +42,10 @@ export class EmpresaGridComponent implements OnDestroy, OnInit {
     globalFilter: string = '';
     nombreEmpresa: string;
     empresaForm: FormGroup;
-
+    departamentos: ICatalogoGenerico[];
+    provincias: ICatalogoGenerico[];
+    distritos: ICatalogoGenerico[];
+    locales: IEmpresaLocalList[];
     get empresa(): EmpresaRequest {
         return this.empresaForm.getRawValue() as EmpresaRequest;
     }
@@ -44,11 +53,16 @@ export class EmpresaGridComponent implements OnDestroy, OnInit {
         @Inject(Router) public router: Router,
         sessionService: SessionService,
         private empresaService: EmpresaService,
-        private messageService: MessageService,
+        private customMessageService: CustomMessageService,
         @Inject(FormBuilder) private fb: FormBuilder,
         public dialogService: DialogService,
-        private loadingService: LoadingService
+        private loadingService: LoadingService,
+        private catalogoService: CatalogoService
     ) {
+        this.departamentos = [];
+        this.provincias = [];
+        this.distritos = [];
+        this.locales = [];
         this.nombreEmpresa = sessionService.getSession().fullname;
         this.empresaForm = this.fb.group({
             id: [0],
@@ -57,18 +71,17 @@ export class EmpresaGridComponent implements OnDestroy, OnInit {
             usuario_sol: [null, [Validators.required]],
             password_sol: [null, [Validators.required]],
             direccion: [null, [Validators.required]],
-            id_distrito: [null, [Validators.required]],
-            id_provincia: [null, [Validators.required]],
-            id_departamento: [null, [Validators.required]],
+            cod_distrito: [null, [Validators.required]],
+            cod_provincia: [null, [Validators.required]],
+            cod_departamento: [null, [Validators.required]],
             plan: [{ value: null, disabled: true }],
             celular: [null, [Validators.required]],
             correo: [null, [Validators.required]]
-        })
-
-
+        });
     }
     ngOnInit(): void {
         this.obtenerEmpresa();
+        this.obtenerCatalogosIniciales();
     }
     ngOnDestroy() {
         if (this.ref) {
@@ -76,34 +89,58 @@ export class EmpresaGridComponent implements OnDestroy, OnInit {
         }
     }
 
-    onGuardarClick(){
-        this.loadingService.show()
-        this.empresaService.registrar(this.empresa)
-        .pipe(finalize(() => this.loadingService.hide()))
-        .subscribe(res => {
-            if(res.success){
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Ok',
-                    detail: res.message,
-                });
-            }
-        })
-    }
-    obtenerEmpresa(){
-        this.empresaService.obtener().subscribe(res => {
-            console.log(res)
-            if(res){
-                this.empresaForm.patchValue(res.data)
-            }
-        })
+    onGuardarClick() {
+        this.loadingService.show();
+        this.empresaService
+            .registrar(this.empresa)
+            .pipe(finalize(() => this.loadingService.hide()))
+            .subscribe((res) => {
+                if (res.success) {
+                    this.customMessageService.showSuccess(res.message);
+                }
+            });
     }
     onNuevoClick() {
+        this.abrirModal()
+    }
+    onEditClick(id_local: number){
+        this.abrirModal(id_local)
+    }
+    onDepartamentoChange(event: any) {        
+        this.provincias = [];
+        this.distritos = [];
+        if (event && event.value) {
+            this.catalogoService.obtener(TipoCatalogo.PROVINCIAS, event.value).subscribe({
+                next: (res) => {
+                    if (res.success) {
+                        this.provincias = res.data;
+                    }
+                }
+            });
+        }
+    }
+    onProvinciaChange(event: any) {
+        if (event && event.value) {
+            this.catalogoService.obtener(TipoCatalogo.DISTRITOS, event.value).subscribe({
+                next: (res) => {
+                    if (res.success) {
+                        this.distritos = res.data;
+                    }
+                }
+            });
+        } else {
+            this.distritos = [];
+        }
+    }
+    abrirModal(id_local: number = 0){
         this.ref = this.dialogService.open(LocalFormComponent, {
-            header: 'Nuevo Local',
+            header: id_local > 0 ? 'Editar Local' : 'Nuevo Local',
             width: '35vw',
             modal: true,
             closable: true,
+            data: {
+                id: id_local
+            },
             contentStyle: { overflow: 'auto' },
             breakpoints: {
                 '960px': '75vw',
@@ -111,8 +148,41 @@ export class EmpresaGridComponent implements OnDestroy, OnInit {
             }
         });
 
-        this.ref?.onClose.subscribe((local: any) => {
-            if (local) {
+        this.ref?.onClose.subscribe((res: ICustomResponse) => {
+            if(res && res.success){
+                this.listarLocales();
+            }
+        });
+    }
+    obtenerEmpresa() {
+        this.empresaService.obtener().subscribe((res) => {
+            if (res) {
+                this.empresaForm.patchValue(res.data);
+                if(res.data.cod_departamento){
+                    this.onDepartamentoChange({ value: res.data.cod_departamento })
+                }
+                if(res.data.cod_provincia){
+                    this.onProvinciaChange({ value: res.data.cod_provincia })
+                }
+                this.listarLocales();
+            }
+        });
+    }
+    listarLocales(){
+        this.empresaService.listarLocales().subscribe((res) => {
+            if (res) {
+                if(res.data){
+                    this.locales = res.data
+                }
+            }
+        });
+    }
+    obtenerCatalogosIniciales() {
+        this.catalogoService.obtener(TipoCatalogo.DEPARTAMENTOS).subscribe({
+            next: (res) => {
+                if (res.success) {
+                    this.departamentos = res.data;
+                }
             }
         });
     }

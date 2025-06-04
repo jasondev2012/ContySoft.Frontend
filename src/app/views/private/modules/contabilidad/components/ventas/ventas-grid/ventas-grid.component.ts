@@ -165,4 +165,18 @@ export class VentasGridComponent implements OnInit {
     limpiarCampoArchivo(): void {
         this.globalFilter = ''; // Limpiamos el valor del input
     }
+
+    calculateCustomerTotal(serieCP: string) {
+        let total = 0;
+
+        if (this.ventas) {
+            for (let venta of this.ventas) {
+                if (venta.serieCP === serieCP) {
+                    total++;
+                }
+            }
+        }
+
+        return total;
+    }
 }

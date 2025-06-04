@@ -5,7 +5,7 @@ import { provideRouter, withEnabledBlockingInitialNavigation, withInMemoryScroll
 import Aura from '@primeng/themes/aura';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { definePreset } from '@primeng/themes';
 import { errorInterceptor } from './app/common/interceptors/error.interceptor';
 import { authInterceptor } from './app/common/interceptors/auth.interceptor';
@@ -54,6 +54,7 @@ export const appConfig: ApplicationConfig = {
                 } 
             } 
         }),
-        MessageService
+        MessageService,
+        ConfirmationService
     ]
 };

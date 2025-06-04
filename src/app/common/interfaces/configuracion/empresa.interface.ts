@@ -5,9 +5,9 @@ export interface EmpresaRequest{
     usuario_sol: string;
     password_sol: string;
     direccion: string;
-    id_distrito: number;
-    id_provincia: number;
-    id_departamento: number;
+    cod_distrito: string;
+    cod_provincia: string;
+    cod_departamento: string;
     plan: string;
     celular: string;
     correo: string;

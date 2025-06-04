@@ -28,19 +28,39 @@
         </div>
         <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
             <label for="codigo" class="font-bold">Departamento</label>
-            <p-select [appShowErrors]="empresaForm.get('id_departamento')" [options]="[]"
-                formControlName="id_departamento" optionLabel="name" placeholder="Selecciona un departamento"
+            <p-select [appShowErrors]="empresaForm.get('cod_departamento')" [options]="departamentos"
+                formControlName="cod_departamento"
+                [showClear]="true"
+                [filter]="true"
+                filterBy="nombre"
+                optionLabel="nombre"
+                optionValue="codigo" 
+                (onChange)="onDepartamentoChange($event)"
+                placeholder="Selecciona un departamento"
                 class="w-full" />
         </div>
         <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
             <label for="codigo" class="font-bold">Provincia</label>
-            <p-select [appShowErrors]="empresaForm.get('id_provincia')" [options]="[]" formControlName="id_provincia"
-                optionLabel="name" placeholder="Selecciona una provincia" class="w-full" />
+            <p-select [appShowErrors]="empresaForm.get('cod_provincia')" [options]="provincias" 
+                formControlName="cod_provincia"                
+                [showClear]="true"
+                [filter]="true"
+                filterBy="nombre"
+                optionLabel="nombre"
+                optionValue="codigo" 
+                (onChange)="onProvinciaChange($event)"
+                placeholder="Selecciona una provincia" class="w-full" />
         </div>
         <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
             <label for="codigo" class="font-bold">Distrito</label>
-            <p-select [appShowErrors]="empresaForm.get('id_distrito')" [options]="[]" formControlName="id_distrito"
-                optionLabel="name" placeholder="Selecciona un distrito" class="w-full" />
+            <p-select [appShowErrors]="empresaForm.get('cod_distrito')" [options]="distritos" 
+                formControlName="cod_distrito"
+                [showClear]="true"
+                [filter]="true"
+                filterBy="nombre"
+                optionLabel="nombre"
+                optionValue="codigo"
+                placeholder="Selecciona un distrito" class="w-full" />
         </div>
         <div class="col-span-12 md:col-span-4 lg:col-span-3 p-2">
             <label for="codigo" class="font-bold">Celular</label>
@@ -61,7 +81,13 @@
         </div>
     </div>
     <p-divider />
-    <p-table [value]="[]" #tbl_empresas styleClass="p-datatable-gridlines" sortField="codigo" [sortOrder]="-1"
+    <p-table 
+        [value]="locales"
+        #tbl_empresas 
+        styleClass="p-datatable-gridlines" 
+        sortField="codigo" 
+        [sortOrder]="1"
+        dataKey="id"
         [tableStyle]="{ 'min-width': '60rem' }">
         <ng-template pTemplate="caption">
             <div class="grid grid-cols-2">
@@ -87,28 +113,38 @@
                     Código <p-sortIcon field="codigo" />
                 </th>
                 <th pSortableColumn="nombre">
-                    Dirección <p-sortIcon field="nombre" />
+                    Nombre <p-sortIcon field="nombre" />
                 </th>
                 <th pSortableColumn="direccion">
                     Dirección <p-sortIcon field="direccion" />
                 </th>
-                <th pSortableColumn="series">
-                    Series <p-sortIcon field="series" />
+                <th pSortableColumn="serie_factura">
+                    Serie Facura <p-sortIcon field="serie_factura" />
                 </th>
-                <th pSortableColumn="estado">
-                    Estado <p-sortIcon field="estado" />
+                <th pSortableColumn="serie_boleta">
+                    Serie Boleta <p-sortIcon field="serie_boleta" />
+                </th>
+                <th>
+                    Estado
                 <th>
                     Opciones
                 </th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product>
+        <ng-template pTemplate="body" let-local>
             <tr>
-                <td>{{ product.code }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.category }}</td>
-                <td>{{ product.quantity }}</td>
+                <td>{{ local.codigo }}</td>
+                <td>{{ local.nombre }}</td>
+                <td>{{ local.direccion }}</td>
+                <td>{{ local.serie_factura }}</td>
+                <td>{{ local.serie_boleta }}</td>
+                <td>
+                    <p-badge *ngIf="local.activo" value="Activo" severity="success" />
+                    <p-badge *ngIf="!local.activo" value="Eliminado" severity="danger" />
+                </td>
+                <td>
+                    <p-button (onClick)="onEditClick(local.id)" icon="pi pi-pencil" title="Editar" [rounded]="true" [text]="true" />
+                </td>
             </tr>
         </ng-template>
         <ng-template #emptymessage>
