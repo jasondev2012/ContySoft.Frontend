@@ -20,6 +20,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
+import { CustomMessageService } from 'src/app/common/services/custom-message.service';
 @Component({
     selector: 'app-ventas-grid',
     templateUrl: './ventas-grid.component.html',
@@ -47,6 +48,7 @@ export class VentasGridComponent implements OnInit {
         private ventasService: VentasService,
         private loadinService: LoadingService,
         private messageService: MessageService,
+        private customMessageService: CustomMessageService,
         private sessionService: SessionService,
         @Inject(Router) public router: Router,
         @Inject(FormBuilder) public fb: FormBuilder
@@ -89,6 +91,7 @@ export class VentasGridComponent implements OnInit {
     }
 
     openBoletaModal(venta: Venta) {
+        console.log(venta)
         this.selectedBoleta = {
             tipoCP: venta.tipoCP,
             numero: venta.numCP,
@@ -165,7 +168,20 @@ export class VentasGridComponent implements OnInit {
     limpiarCampoArchivo(): void {
         this.globalFilter = ''; // Limpiamos el valor del input
     }
+    descargar(venta: Venta, tipo: string){
+        this.loadinService.show();
+        this.ventasService.obtenerArchivo(tipo, venta.serieCP, venta.numCP)
+        .pipe(finalize(() => this.loadinService.hide()))
+        .subscribe({
+            next: res => {
+                if(res.data){
 
+                }else{
+                    this.customMessageService.showError(res.message)
+                }
+            }
+        })
+    }
     calculateCustomerTotal(serieCP: string) {
         let total = 0;
 

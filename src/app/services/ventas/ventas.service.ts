@@ -14,6 +14,9 @@ export class VentasService {
         this.api = environment.api;
     }
 
+    obtenerArchivo(tipo: string, serie: string, numero: string): Observable<any>{
+        return this.http.get<any>(`${this.api}ventas/obtener-comprobante/${tipo}/${serie}/${numero}`);
+    }
     obtenerPeriodo(): Observable<ICustomDataResponse<any>>{
         return this.http.get<ICustomDataResponse<any>>(`${this.api}ventas/periodos`);
     }
